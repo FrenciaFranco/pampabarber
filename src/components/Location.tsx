@@ -31,15 +31,15 @@ export function Location() {
             mapsEmbed: "https://www.google.com/maps?q=Pampa+Barber,+Avinguda+Meridiana,+1,+Barcelona&output=embed",
         },
         {
-            id: "barcelona-laietana",
+            id: "barcelona-sagrada-familia",
             city: "Barcelona",
-            zone: "Laietana",
-            address: "Via Laietana, Barcelona (proxima apertura)",
+            zone: "Sagrada Familia",
+            address: "Zona Sagrada Familia, Barcelona (proxima apertura)",
             status: "Proxima apertura",
             image:
-                "https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?auto=format&fit=crop&w=1600&q=80",
-            mapsUrl: "https://maps.google.com/?q=Via+Laietana,Barcelona",
-            mapsEmbed: "https://www.google.com/maps?q=Via+Laietana,+Barcelona&output=embed",
+                "https://offloadmedia.feverup.com/barcelonasecreta.com/wp-content/uploads/2015/07/13082736/shutterstock_580489630-1.jpg",
+            mapsUrl: "https://maps.google.com/?q=Sagrada+Familia,Barcelona",
+            mapsEmbed: "https://www.google.com/maps?q=Sagrada+Familia,+Barcelona&output=embed",
         },
         {
             id: "madrid-retiro",
@@ -53,6 +53,12 @@ export function Location() {
             mapsEmbed: "https://www.google.com/maps?q=Parque+del+Retiro,+Madrid&output=embed",
         },
     ];
+    const branchPhotosById: Record<string, string[]> = {
+        "barcelona-meridiana": [
+            "/barbers/Meridiana/90957f91ef98499bbdc3a0fa5af429-pampa-barber-biz-photo-fb9271bc6e6a49f6b33c0dae56901d-booksy.jpeg",
+            "/barbers/Meridiana/dc25ec16b5a74fa69ece731f79e9e7-pampa-barber-biz-photo-a081f8c47fe84c518fe67094fe5028-booksy.jpeg",
+        ],
+    };
 
     const [selectedBranchId, setSelectedBranchId] = useState(branches[0].id);
     const selectedBranch = branches.find((branch) => branch.id === selectedBranchId) ?? branches[0];
@@ -64,12 +70,15 @@ export function Location() {
     };
 
     return (
-        <section id="ubicacion" className="py-32 bg-white dark:bg-neutral-950">
-            <div className="max-w-7xl mx-auto px-6 md:px-12">
+        <section id="ubicacion" className="relative py-32 bg-white dark:bg-neutral-950 overflow-hidden">
+            <div className="pointer-events-none absolute top-0 -left-10 h-[500px] w-[500px] rounded-full bg-neutral-200/50 dark:bg-neutral-800/30 blur-[120px]" />
+            <div className="pointer-events-none absolute bottom-0 right-0 h-[600px] w-[600px] rounded-full bg-neutral-300/30 dark:bg-neutral-800/20 blur-[150px]" />
+
+            <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
                 <div className="mb-14">
-                    <h2 className="font-serif text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-5 tracking-tight">Nuestras sucursales.</h2>
+                    <h2 className="font-serif text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-5 tracking-tight">Nuestras barberias</h2>
                     <p className="text-neutral-600 dark:text-neutral-400 font-light text-lg max-w-2xl leading-relaxed">
-                        Barcelona (Meridiana) ya abierta. Proximas aperturas: Barcelona (Laietana) y Madrid (Retiro).
+                        Barcelona (Meridiana) ya abierta. Proximas aperturas: Barcelona (Sagrada Familia) y Madrid (Retiro).
                     </p>
                 </div>
 
@@ -123,42 +132,46 @@ export function Location() {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-stretch">
-                    <div className="lg:col-span-2 bg-[#F9F9F9] dark:bg-neutral-900 p-7 border border-neutral-200 dark:border-neutral-800 rounded-2xl">
-                        <h3 className="text-sm uppercase tracking-widest text-neutral-400 font-semibold mb-4">Sucursal seleccionada</h3>
-                        <p className="font-serif text-3xl text-neutral-900 dark:text-white mb-2">
-                            {selectedBranch.city}
-                            <span className="text-neutral-500 dark:text-neutral-400"> ({selectedBranch.zone})</span>
-                        </p>
-                        <p className="font-light text-neutral-600 dark:text-neutral-400 mb-7 leading-relaxed">{selectedBranch.address}</p>
+                    <div className="lg:col-span-2 relative overflow-hidden rounded-3xl border border-neutral-200/60 dark:border-white/10 bg-white/40 dark:bg-white/[0.02] p-8 backdrop-blur-2xl shadow-sm dark:shadow-2xl transition-all">
+                        <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neutral-300/50 dark:via-white/20 to-transparent opacity-100" />
+                        
+                        <div className="relative z-10">
+                            <h3 className="text-[11px] uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-500 font-bold mb-5">Sucursal seleccionada</h3>
+                            <p className="font-serif text-3xl md:text-4xl text-neutral-900 dark:text-white mb-3 tracking-tight">
+                                {selectedBranch.city}
+                                <span className="text-neutral-500 dark:text-neutral-400 font-light"> ({selectedBranch.zone})</span>
+                            </p>
+                            <p className="font-light text-neutral-600 dark:text-neutral-300 mb-8 leading-relaxed text-lg">{selectedBranch.address}</p>
 
-                        <div className="flex flex-wrap gap-3">
-                            <button
-                                type="button"
-                                onClick={copyToClipboard}
-                                className="group inline-flex items-center gap-2 text-sm font-medium text-neutral-900 dark:text-white border border-neutral-300 dark:border-neutral-600 px-4 py-2.5 hover:border-neutral-900 dark:hover:border-white transition-colors"
-                            >
-                                {copied ? <Check size={16} className="text-emerald-600" /> : <Copy size={16} />}
-                                <span>{copied ? "Dirección copiada" : "Copiar dirección"}</span>
-                            </button>
+                            <div className="flex flex-col sm:flex-row flex-wrap gap-4">
+                                <button
+                                    type="button"
+                                    onClick={copyToClipboard}
+                                    className="group inline-flex items-center justify-center gap-2.5 text-sm font-medium text-neutral-900 dark:text-white border border-neutral-300 dark:border-white/20 bg-white/50 dark:bg-white/5 backdrop-blur-md px-5 py-3 rounded-xl hover:border-neutral-900 dark:hover:border-white/40 hover:bg-white dark:hover:bg-white/10 transition-all shadow-sm"
+                                >
+                                    {copied ? <Check size={16} className="text-emerald-600 dark:text-emerald-400" /> : <Copy size={16} />}
+                                    <span>{copied ? "Dirección copiada" : "Copiar dirección"}</span>
+                                </button>
 
-                            <a
-                                href={selectedBranch.mapsUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 px-5 py-2.5 font-medium hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors"
-                            >
-                                <Map size={17} />
-                                Ver en mapa
-                            </a>
-                        </div>
+                                <a
+                                    href={selectedBranch.mapsUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center justify-center gap-2.5 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 px-6 py-3 rounded-xl font-medium hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-all shadow-md"
+                                >
+                                    <Map size={17} />
+                                    Ver en mapa
+                                </a>
+                            </div>
 
-                        <div className="mt-6 pt-6 border-t border-neutral-200 dark:border-neutral-700 text-sm text-neutral-600 dark:text-neutral-400 flex items-center gap-2">
-                            <MapPin size={16} className="text-neutral-500 dark:text-neutral-400" />
-                            Selecciona una sucursal para ver su ubicacion.
+                            <div className="mt-8 pt-6 border-t border-neutral-200/50 dark:border-white/10 text-sm text-neutral-500 dark:text-neutral-400 flex items-center gap-3">
+                                <MapPin size={16} className="text-neutral-400 dark:text-neutral-500" />
+                                <span>Selecciona una barberia para ver su ubicacion.</span>
+                            </div>
                         </div>
                     </div>
 
-                    <div className="lg:col-span-3 min-h-[420px] relative border border-neutral-200 dark:border-neutral-700 overflow-hidden rounded-2xl bg-neutral-100 dark:bg-neutral-800">
+                    <div className="lg:col-span-3 min-h-[420px] relative border border-neutral-200/60 dark:border-white/10 overflow-hidden rounded-3xl bg-neutral-100 dark:bg-neutral-900 shadow-sm dark:shadow-2xl">
                         <iframe
                             key={selectedBranch.id}
                             title={`Mapa de ${selectedBranch.city} ${selectedBranch.zone}`}
@@ -180,6 +193,28 @@ export function Location() {
                             </a>
                         </div>
                     </div>
+                </div>
+
+                <div className="mt-8 md:mt-10">
+                    <h3 className="font-serif text-2xl md:text-3xl text-neutral-900 dark:text-white mb-4 tracking-tight">Fotos de nuestra barberia</h3>
+                    {(branchPhotosById[selectedBranch.id] ?? []).length > 0 ? (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {(branchPhotosById[selectedBranch.id] ?? []).map((photo) => (
+                                <div key={photo} className="overflow-hidden rounded-2xl border border-neutral-200 dark:border-white/10 bg-neutral-100 dark:bg-neutral-900">
+                                    <img
+                                        src={photo}
+                                        alt={`PAMPA Barber ${selectedBranch.zone}`}
+                                        className="w-full h-[260px] md:h-[320px] object-cover"
+                                        loading="lazy"
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <p className="text-neutral-500 dark:text-neutral-400 text-sm">
+                            Aun no hay fotos publicadas para esta barberia.
+                        </p>
+                    )}
                 </div>
             </div>
         </section>

@@ -15,9 +15,6 @@ export function CtaSection() {
 
     return (
         <section className="py-32 bg-neutral-900 border-t border-neutral-800 relative w-full flex flex-col items-center justify-center text-center px-6 z-10 overflow-hidden">
-            {/* Texture / Noise Overlay (Matches Hero) */}
-            <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-soft-light pointer-events-none" />
-
             <div className="max-w-3xl relative z-10 w-full flex flex-col items-center">
                 <h2 className="text-4xl md:text-6xl font-serif font-bold tracking-tight text-white mb-6">
                     Tu estilo, sin esperas. <br className="hidden md:block" />

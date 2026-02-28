@@ -22,8 +22,10 @@ export function Reviews() {
     const duplicated = [...REVIEWS, ...REVIEWS];
 
     return (
-        <section id="resenas" className="py-32 bg-[#F9F9F9] dark:bg-neutral-950">
-            <div className="max-w-7xl mx-auto px-6 md:px-12 mb-16">
+        <section id="resenas" className="relative py-32 bg-[#F9F9F9] dark:bg-neutral-950 overflow-hidden">
+            <div className="pointer-events-none absolute top-1/2 left-1/4 h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-neutral-200/50 dark:bg-neutral-800/30 blur-[100px]" />
+            
+            <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 mb-16">
                 <h2 className="font-serif text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-4 tracking-tight">Reseñas.</h2>
                 <div className="flex items-center gap-3 flex-wrap">
                     <div className="flex text-yellow-500">
@@ -49,10 +51,12 @@ export function Reviews() {
                     {duplicated.map((review, idx) => (
                         <div
                             key={`${review.source}-${idx}-${review.name}`}
-                            className="bg-white dark:bg-neutral-900 p-8 border border-neutral-100 dark:border-neutral-800 shadow-sm flex-shrink-0 w-[350px]"
+                            className="relative group bg-white/40 dark:bg-white/[0.02] p-8 rounded-2xl border border-neutral-200/60 dark:border-white/10 backdrop-blur-xl shadow-sm dark:shadow-2xl flex-shrink-0 w-[350px] transition-all duration-300 hover:bg-white/60 dark:hover:bg-white/[0.04] hover:border-neutral-300/80 dark:hover:border-white/20"
                         >
-                            <div className="flex items-center gap-4 mb-6">
-                                <div className="w-10 h-10 rounded-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center text-neutral-600 dark:text-neutral-300 font-medium uppercase">
+                            <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neutral-300/50 dark:via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                            
+                            <div className="relative z-10 flex items-center gap-4 mb-6">
+                                <div className="w-10 h-10 rounded-full bg-neutral-200/60 dark:bg-white/10 flex items-center justify-center text-neutral-700 dark:text-white font-medium uppercase border-2 border-white dark:border-white/10 shadow-sm">
                                     {review.name.charAt(0)}
                                 </div>
                                 <div>

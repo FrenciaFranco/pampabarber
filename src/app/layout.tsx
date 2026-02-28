@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { PreferencesProvider } from "@/components/PreferencesProvider";
 import "./globals.css";
 
 const inter = Inter({
@@ -29,7 +30,7 @@ export default function RootLayout({
         className={`${inter.variable} ${playfair.variable} antialiased font-sans bg-[#F9F9F9] dark:bg-[#0a0a0a] text-neutral-900 dark:text-neutral-100`}
       >
         <ThemeProvider>
-          {children}
+          <PreferencesProvider>{children}</PreferencesProvider>
         </ThemeProvider>
       </body>
     </html>

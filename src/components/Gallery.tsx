@@ -3,11 +3,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Instagram, X, ZoomIn, ZoomOut } from "lucide-react";
-import { BOOKSY_BARBERS, BOOKSY_GALLERY_IMAGES } from "@/lib/booksy";
+import { BOOKSY_GALLERY_IMAGES } from "@/lib/booksy";
 
 export function Gallery() {
     const images = useMemo(
-        () => [...BOOKSY_GALLERY_IMAGES, ...BOOKSY_BARBERS.map((barber) => barber.image)],
+        () => BOOKSY_GALLERY_IMAGES.filter((image) => image.includes("/inspiration/")),
         []
     );
     const [activeIndex, setActiveIndex] = useState(0);

@@ -1,14 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Menu, Moon, Sun, X } from "lucide-react";
 import { BOOKSY_URL } from "@/lib/booksy";
 import { useTheme } from "@/components/ThemeProvider";
+import { usePreferences } from "@/components/PreferencesProvider";
 
 export function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const { theme, toggleTheme } = useTheme();
+    const { language } = usePreferences();
     const isDarkMode = theme === "dark";
 
     useEffect(() => {
@@ -19,14 +21,44 @@ export function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const navLinks = [
-        { name: "Barberos", href: "#barberos" },
-        { name: "Servicios", href: "#servicios" },
-        { name: "Estilo", href: "#estilo" },
-        { name: "Reseñas", href: "#resenas" },
-        { name: "Ubicación", href: "#ubicacion" },
-        { name: "FAQ", href: "#faq" },
-    ];
+    const copy = language === "en"
+        ? {
+            navLinks: [
+                { name: "Barbers", href: "#barberos" },
+                { name: "Services", href: "#servicios" },
+                { name: "Products", href: "#productos" },
+                { name: "Style", href: "#estilo" },
+                { name: "Reviews", href: "#resenas" },
+                { name: "Location", href: "#ubicacion" },
+                { name: "FAQ", href: "#faq" },
+            ],
+            reserve: "Book now",
+        }
+        : language === "ca"
+            ? {
+                navLinks: [
+                    { name: "Barbers", href: "#barberos" },
+                    { name: "Serveis", href: "#servicios" },
+                    { name: "Productes", href: "#productos" },
+                    { name: "Estil", href: "#estilo" },
+                    { name: "Ressenyes", href: "#resenas" },
+                    { name: "Ubicacio", href: "#ubicacion" },
+                    { name: "FAQ", href: "#faq" },
+                ],
+                reserve: "Reservar",
+            }
+            : {
+                navLinks: [
+                    { name: "Barberos", href: "#barberos" },
+                    { name: "Servicios", href: "#servicios" },
+                    { name: "Productos", href: "#productos" },
+                    { name: "Estilo", href: "#estilo" },
+                    { name: "Resenas", href: "#resenas" },
+                    { name: "Ubicacion", href: "#ubicacion" },
+                    { name: "FAQ", href: "#faq" },
+                ],
+                reserve: "Reservar",
+            };
 
     const navTheme = isDarkMode
         ? {
@@ -57,24 +89,17 @@ export function Navbar() {
         };
 
     return (
-        <nav
-            className={`fixed top-0 w-full z-50 transition-all duration-300 ${navTheme.container}`}
-        >
+        <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${navTheme.container}`}>
             <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between pointer-events-auto">
-                {/* Logo */}
                 <a href="#" className={`text-2xl font-serif font-bold tracking-tighter ${navTheme.logo}`}>
                     PAMPA <span className={`font-sans text-lg font-normal ${navTheme.logoSub}`}>Barber</span>
                 </a>
 
-                {/* Desktop Links */}
                 <div className="hidden md:flex items-center gap-8">
                     <ul className="flex items-center gap-8">
-                        {navLinks.map((link) => (
+                        {copy.navLinks.map((link) => (
                             <li key={link.name}>
-                                <a
-                                    href={link.href}
-                                    className={`text-sm font-medium transition-colors ${navTheme.link}`}
-                                >
+                                <a href={link.href} className={`text-sm font-medium transition-colors ${navTheme.link}`}>
                                     {link.name}
                                 </a>
                             </li>
@@ -94,35 +119,33 @@ export function Navbar() {
                         rel="noopener noreferrer"
                         className={`px-6 py-2.5 text-sm font-semibold transition-colors rounded-md ${navTheme.cta}`}
                     >
-                        Reservar
+                        {copy.reserve}
                     </a>
                 </div>
 
-                {/* Mobile Toggle */}
-                <div className="md:hidden flex items-center gap-2">
+                <div className="md:hidden flex items-center gap-1.5">
                     <button
                         type="button"
-                        className={`rounded-md p-2 ${navTheme.iconButton}`}
+                        className={`rounded-md p-1.5 ${navTheme.iconButton}`}
                         onClick={toggleTheme}
                         aria-label="Toggle theme"
                     >
-                        {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+                        {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
                     </button>
                     <button
-                        className={`rounded-md p-2 ${navTheme.iconButton}`}
+                        className={`rounded-md p-1.5 ${navTheme.iconButton}`}
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                         aria-label="Toggle menu"
                     >
-                        {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                        {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
                     </button>
                 </div>
             </div>
 
-            {/* Mobile Menu */}
             {mobileMenuOpen && (
                 <div className={`absolute top-full left-0 w-full shadow-2xl border-t md:hidden flex flex-col p-6 gap-6 ${navTheme.mobileMenu}`}>
                     <ul className="flex flex-col gap-6">
-                        {navLinks.map((link) => (
+                        {copy.navLinks.map((link) => (
                             <li key={link.name}>
                                 <a
                                     href={link.href}
@@ -140,7 +163,7 @@ export function Navbar() {
                         rel="noopener noreferrer"
                         className={`inline-flex justify-center px-6 py-3 text-base font-semibold rounded-md ${navTheme.mobileCta}`}
                     >
-                        Reservar
+                        {copy.reserve}
                     </a>
                 </div>
             )}

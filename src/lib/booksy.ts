@@ -4,10 +4,10 @@ export const BOOKSY_SERVICE_URLS: Record<string, string> = {
   "Barba Completa": `${BOOKSY_URL}?do=book&service=1149478`,
   "Barba Express": `${BOOKSY_URL}?do=book&service=1149488`,
   "Corte + Barba Completa": `${BOOKSY_URL}?do=book&service=1149491`,
-  "Corte + Barba Express": `${BOOKSY_URL}?do=book&service=1149494`,
+  "Corte + Barba Express": "https://booksy.com/es-es/121866_pampa-barber_barberia_48863_barcelona?do=book&service=1757457",
   "Corte + Barba Completa + Limpieza facial": `${BOOKSY_URL}?do=book&service=1149495`,
   "Corte + Limpieza facial": `${BOOKSY_URL}?do=book&service=1149496`,
-  Cejas: `${BOOKSY_URL}?do=book&service=1149499`,
+  "Cejas": `${BOOKSY_URL}?do=book&service=1149499`,
   "Depilación con cera": `${BOOKSY_URL}?do=book&service=1149504`,
   "Corte jubilado": `${BOOKSY_URL}?do=book&service=1176029`,
 };
