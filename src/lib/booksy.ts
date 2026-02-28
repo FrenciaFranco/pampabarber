@@ -39,12 +39,18 @@ export const BOOKSY_BARBERS = [
   {
     name: "Octavio",
     role: "Barbero",
+    badge: "Founder",
+    experience: "15 años de experiencia",
+    details: "Especialista en diseño. Ha trabajado en varios países del mundo, como Argentina y Portugal.",
     image:
       "https://d375139ucebi94.cloudfront.net/region2/es/121866/resource_photos/f9a12bdd122d405c91b21595d60d91-pampa-barber-octavio-743d61ee9546459db267161616386f-booksy.jpeg",
   },
   {
     name: "Freli",
     role: "Barbero",
+    badge: "",
+    experience: "10 años de experiencia",
+    details: "Especialista en corte y barba con atencion al detalle. Ha trabajado en varios países del mundo, como Ecuador.",
     image:
       "https://d375139ucebi94.cloudfront.net/region2/es/121866/resource_photos/7c917852eca24da395c4634e1ca00a-pampa-barber-freli-6031738ad62344a286d02525896554-booksy.jpeg",
   },

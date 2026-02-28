@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { BOOKSY_BARBERS, BOOKSY_URL } from "@/lib/booksy";
+import { BOOKSY_BARBERS } from "@/lib/booksy";
 
 export function Barbers() {
   return (
@@ -16,17 +16,9 @@ export function Barbers() {
               Barberos.
             </h2>
             <p className="text-neutral-500 dark:text-neutral-400 font-light text-lg max-w-2xl">
-              Equipo visible en Booksy: profesionales especializados en corte y barba, con atencion personalizada.
+              Profesionales especializados en corte y barba, con atencion personalizada.
             </p>
           </div>
-          <a
-            href={BOOKSY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-neutral-900 dark:text-white font-medium text-sm border-b border-neutral-900 dark:border-white pb-1 hover:text-neutral-500 hover:border-neutral-500 transition-colors"
-          >
-            Ver perfiles en Booksy
-          </a>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
@@ -49,8 +41,17 @@ export function Barbers() {
                   loading="lazy"
                 />
                 <div>
-                  <h3 className="font-serif text-2xl text-neutral-900 dark:text-white mb-1">{barber.name}</h3>
+                  <div className="flex items-center gap-2 mb-1">
+                    <h3 className="font-serif text-2xl text-neutral-900 dark:text-white">{barber.name}</h3>
+                    {barber.badge && (
+                      <span className="text-[10px] uppercase tracking-[0.14em] px-2.5 py-1 rounded-full bg-[#efd39a] text-[#2d2110] font-bold">
+                        {barber.badge}
+                      </span>
+                    )}
+                  </div>
                   <p className="text-neutral-500 dark:text-neutral-400 font-light">{barber.role}</p>
+                  <p className="text-sm text-neutral-700 dark:text-neutral-300 mt-2">{barber.experience}</p>
+                  <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">{barber.details}</p>
                 </div>
               </div>
             </motion.article>
