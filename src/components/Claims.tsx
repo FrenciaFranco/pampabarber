@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Scissors, Sparkles, Watch } from "lucide-react";
+import { Scissors, VenetianMask, Watch } from "lucide-react";
 
 export function Claims() {
     const claims = [
@@ -11,9 +11,9 @@ export function Claims() {
             icon: <Scissors className="w-6 h-6 text-neutral-900 dark:text-neutral-100" strokeWidth={1.5} />,
         },
         {
-            title: "Barbas limpias",
+            title: "Barbas perfectas",
             desc: "Perfilado milimétrico y cuidado facial superior.",
-            icon: <Sparkles className="w-6 h-6 text-neutral-900 dark:text-neutral-100" strokeWidth={1.5} />,
+            icon: <VenetianMask className="w-6 h-6 text-neutral-900 dark:text-neutral-100" strokeWidth={1.5} />,
         },
         {
             title: "Ritual minimalista",

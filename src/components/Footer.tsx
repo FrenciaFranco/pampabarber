@@ -62,6 +62,8 @@ export function Footer() {
                         <a href="#resenas" className="hover:text-white transition-colors w-fit">Reseñas</a>
                         <a href="#ubicacion" className="hover:text-white transition-colors w-fit">Ubicación</a>
                         <a href="#faq" className="hover:text-white transition-colors w-fit">FAQ</a>
+                        <a href="/barberia-barcelona" className="hover:text-white transition-colors w-fit">Barberia Barcelona</a>
+                        <a href="/barberia-meridiana-ciutadella" className="hover:text-white transition-colors w-fit">Meridiana y Ciutadella</a>
                     </div>
                 </div>
             </div>

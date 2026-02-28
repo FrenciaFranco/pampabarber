@@ -70,19 +70,19 @@ export function Location() {
     };
 
     return (
-        <section id="ubicacion" className="relative py-32 bg-white dark:bg-neutral-950 overflow-hidden">
+        <section id="ubicacion" className="relative py-20 md:py-32 bg-white dark:bg-neutral-950 overflow-hidden">
             <div className="pointer-events-none absolute top-0 -left-10 h-[500px] w-[500px] rounded-full bg-neutral-200/50 dark:bg-neutral-800/30 blur-[120px]" />
             <div className="pointer-events-none absolute bottom-0 right-0 h-[600px] w-[600px] rounded-full bg-neutral-300/30 dark:bg-neutral-800/20 blur-[150px]" />
 
             <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
-                <div className="mb-14">
+                <div className="mb-10 md:mb-14">
                     <h2 className="font-serif text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-5 tracking-tight">Nuestras barberias</h2>
                     <p className="text-neutral-600 dark:text-neutral-400 font-light text-lg max-w-2xl leading-relaxed">
                         Barcelona (Meridiana) ya abierta. Proximas aperturas: Barcelona (Sagrada Familia) y Madrid (Retiro).
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6 md:mb-10">
                     {branches.map((branch) => {
                         const active = branch.id === selectedBranch.id;
 
@@ -111,18 +111,17 @@ export function Location() {
 
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
 
+                                <span
+                                    className={`absolute right-3 top-3 z-20 text-[11px] uppercase tracking-[0.14em] px-2.5 py-1 rounded-full ${
+                                        branch.status === "Abierta" ? "bg-emerald-500/90" : "bg-white/20 backdrop-blur"
+                                    }`}
+                                >
+                                    {branch.status}
+                                </span>
+
                                 <div className="absolute inset-x-0 bottom-0 p-5 text-white">
                                     <div className="flex items-center justify-between gap-3 mb-2">
                                         <h3 className="font-serif text-2xl leading-none">{branch.city}</h3>
-                                        <span
-                                            className={`text-[11px] uppercase tracking-[0.14em] px-2.5 py-1 rounded-full ${
-                                                branch.status === "Abierta"
-                                                    ? "bg-emerald-500/90"
-                                                    : "bg-white/20 backdrop-blur"
-                                            }`}
-                                        >
-                                            {branch.status}
-                                        </span>
                                     </div>
                                     <p className="text-sm text-white/85">{branch.zone}</p>
                                 </div>
@@ -195,7 +194,7 @@ export function Location() {
                     </div>
                 </div>
 
-                <div className="mt-8 md:mt-10">
+                <div className="mt-6 md:mt-10">
                     <h3 className="font-serif text-2xl md:text-3xl text-neutral-900 dark:text-white mb-4 tracking-tight">Fotos de nuestra barberia</h3>
                     {(branchPhotosById[selectedBranch.id] ?? []).length > 0 ? (
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

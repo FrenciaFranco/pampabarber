@@ -35,7 +35,7 @@ body {
 }
 
 .animate-scroll {
-  animation: scroll 30s linear infinite;
+  animation: scroll 39.7s linear infinite;
 }
 
 @utility scrollbar-hide {

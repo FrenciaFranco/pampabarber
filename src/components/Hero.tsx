@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { LiquidMetal } from "@paper-design/shaders-react";
 import {
@@ -162,10 +163,13 @@ export function Hero() {
                         transition={{ duration: 0.8, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
                         className="relative h-[420px] md:h-[560px] overflow-hidden shadow-[0_28px_80px_rgba(0,0,0,0.65)]"
                     >
-                        <img
+                        <Image
                             src="/silla.png"
                             alt="Interior de PAMPA Barber"
                             className="h-full w-full object-cover"
+                            fill
+                            priority
+                            sizes="(max-width: 1024px) 100vw, 50vw"
                         />
                         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_92%_at_50%_50%,transparent_58%,rgba(8,8,8,0.56)_84%,rgba(8,8,8,0.94)_100%)]" />
                         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.14)_0%,transparent_28%,transparent_72%,rgba(0,0,0,0.45)_100%)]" />

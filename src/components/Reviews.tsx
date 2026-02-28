@@ -9,13 +9,51 @@ import {
 } from "@/lib/booksy";
 
 export function Reviews() {
+    const scrollerRef = useRef<HTMLDivElement>(null);
     const trackRef = useRef<HTMLDivElement>(null);
+    const isDraggingRef = useRef(false);
+    const startXRef = useRef(0);
+    const startScrollLeftRef = useRef(0);
 
     const pause = () => {
         trackRef.current?.style.setProperty("animation-play-state", "paused");
     };
+
     const resume = () => {
         trackRef.current?.style.setProperty("animation-play-state", "running");
+    };
+
+    const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+        if (!scrollerRef.current) {
+            return;
+        }
+
+        isDraggingRef.current = true;
+        startXRef.current = event.clientX;
+        startScrollLeftRef.current = scrollerRef.current.scrollLeft;
+        scrollerRef.current.setPointerCapture(event.pointerId);
+        pause();
+    };
+
+    const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+        if (!isDraggingRef.current || !scrollerRef.current) {
+            return;
+        }
+
+        const deltaX = event.clientX - startXRef.current;
+        scrollerRef.current.scrollLeft = startScrollLeftRef.current - deltaX;
+    };
+
+    const handlePointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
+        if (!scrollerRef.current) {
+            return;
+        }
+
+        isDraggingRef.current = false;
+        if (scrollerRef.current.hasPointerCapture(event.pointerId)) {
+            scrollerRef.current.releasePointerCapture(event.pointerId);
+        }
+        resume();
     };
 
     // Duplicate the reviews for seamless infinite loop
@@ -39,19 +77,25 @@ export function Reviews() {
                 </div>
             </div>
 
-            <div className="overflow-hidden">
+            <div
+                ref={scrollerRef}
+                className="overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing select-none touch-pan-x px-4 sm:px-6 md:px-0"
+                onPointerDown={handlePointerDown}
+                onPointerMove={handlePointerMove}
+                onPointerUp={handlePointerUp}
+                onPointerCancel={handlePointerUp}
+                onPointerLeave={handlePointerUp}
+                onMouseEnter={pause}
+                onMouseLeave={resume}
+            >
                 <div
                     ref={trackRef}
-                    className="flex gap-6 animate-scroll"
-                    onMouseEnter={pause}
-                    onMouseLeave={resume}
-                    onTouchStart={pause}
-                    onTouchEnd={resume}
+                    className="flex gap-4 md:gap-6 w-max pb-2 animate-scroll"
                 >
                     {duplicated.map((review, idx) => (
                         <div
                             key={`${review.source}-${idx}-${review.name}`}
-                            className="relative group bg-white/40 dark:bg-white/[0.02] p-8 rounded-2xl border border-neutral-200/60 dark:border-white/10 backdrop-blur-xl shadow-sm dark:shadow-2xl flex-shrink-0 w-[350px] transition-all duration-300 hover:bg-white/60 dark:hover:bg-white/[0.04] hover:border-neutral-300/80 dark:hover:border-white/20"
+                            className="relative group bg-white/40 dark:bg-white/[0.02] p-6 md:p-8 rounded-2xl border border-neutral-200/60 dark:border-white/10 backdrop-blur-xl shadow-sm dark:shadow-2xl flex-shrink-0 w-[min(350px,calc(100vw-2rem))] sm:w-[340px] md:w-[350px] transition-all duration-300 hover:bg-white/60 dark:hover:bg-white/[0.04] hover:border-neutral-300/80 dark:hover:border-white/20"
                         >
                             <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neutral-300/50 dark:via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                             

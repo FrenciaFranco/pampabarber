@@ -23,11 +23,12 @@ export function Navbar() {
 
     const copy = language === "en"
         ? {
-            navLinks: [
-                { name: "Barbers", href: "#barberos" },
-                { name: "Services", href: "#servicios" },
-                { name: "Products", href: "#productos" },
-                { name: "Style", href: "#estilo" },
+                navLinks: [
+                    { name: "Barbers", href: "#barberos" },
+                    { name: "Services", href: "#servicios" },
+                    { name: "Plans", href: "#suscripciones" },
+                    { name: "Products", href: "#productos" },
+                    { name: "Style", href: "#estilo" },
                 { name: "Reviews", href: "#resenas" },
                 { name: "Location", href: "#ubicacion" },
                 { name: "FAQ", href: "#faq" },
@@ -39,6 +40,7 @@ export function Navbar() {
                 navLinks: [
                     { name: "Barbers", href: "#barberos" },
                     { name: "Serveis", href: "#servicios" },
+                    { name: "Plans", href: "#suscripciones" },
                     { name: "Productes", href: "#productos" },
                     { name: "Estil", href: "#estilo" },
                     { name: "Ressenyes", href: "#resenas" },
@@ -51,6 +53,7 @@ export function Navbar() {
                 navLinks: [
                     { name: "Barberos", href: "#barberos" },
                     { name: "Servicios", href: "#servicios" },
+                    { name: "Suscripciones", href: "#suscripciones" },
                     { name: "Productos", href: "#productos" },
                     { name: "Estilo", href: "#estilo" },
                     { name: "Resenas", href: "#resenas" },

@@ -2,7 +2,7 @@
 
 import { useMemo, useState, type ComponentType } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Gem, Scissors, Sparkles } from "lucide-react";
+import { ArrowRight, Gem, Scissors, Sparkles, VenetianMask } from "lucide-react";
 import { getBooksyServiceUrl } from "@/lib/booksy";
 import { usePreferences } from "@/components/PreferencesProvider";
 
@@ -17,29 +17,6 @@ interface Service {
     booksyName: string;
     popular?: boolean;
 }
-
-function MustacheIcon({ size = 16, className }: { size?: number; className?: string }) {
-    return (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width={size}
-            height={size}
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className={className}
-            aria-hidden="true"
-        >
-            <path d="M12 12.5c-.8-1.2-2.1-2-3.6-2-2.4 0-3.9 1.6-3.9 3.4 0 .8.2 1.5.7 2.1 1 .1 2.3-.4 3.3-1.4.8-.8 1.7-1.9 3.5-2.1" />
-            <path d="M12 12.5c.8-1.2 2.1-2 3.6-2 2.4 0 3.9 1.6 3.9 3.4 0 .8-.2 1.5-.7 2.1-1 .1-2.3-.4-3.3-1.4-.8-.8-1.7-1.9-3.5-2.1" />
-            <path d="M9.4 13.3c.7.5 1.6.8 2.6.8s1.9-.3 2.6-.8" />
-        </svg>
-    );
-}
-
 
 const servicesList: Service[] = [
     { name: { es: "Corte de cabello", en: "Haircut" }, priceEur: 21, durationMinutes: 45, category: ["Corte"], booksyName: "Corte de cabello", popular: true },
@@ -99,7 +76,7 @@ export function Services() {
                 key: "Barba",
                 title: language === "en" ? "Beard" : "Barba",
                 hint: language === "en" ? "Shaping and finish" : "Perfilado y acabado",
-                icon: MustacheIcon,
+                icon: VenetianMask,
             },
             {
                 key: "Detalles",
