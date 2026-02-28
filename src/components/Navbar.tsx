@@ -34,6 +34,8 @@ export function Navbar() {
                 { name: "FAQ", href: "#faq" },
             ],
             reserve: "Book now",
+            toggleTheme: "Toggle theme",
+            toggleMenu: "Toggle menu",
         }
         : language === "ca"
             ? {
@@ -48,6 +50,8 @@ export function Navbar() {
                     { name: "FAQ", href: "#faq" },
                 ],
                 reserve: "Reservar",
+                toggleTheme: "Canviar tema",
+                toggleMenu: "Canviar menu",
             }
             : {
                 navLinks: [
@@ -61,6 +65,8 @@ export function Navbar() {
                     { name: "FAQ", href: "#faq" },
                 ],
                 reserve: "Reservar",
+                toggleTheme: "Cambiar tema",
+                toggleMenu: "Abrir menu",
             };
 
     const navTheme = isDarkMode
@@ -111,7 +117,7 @@ export function Navbar() {
                     <button
                         type="button"
                         onClick={toggleTheme}
-                        aria-label="Toggle theme"
+                        aria-label={copy.toggleTheme}
                         className={`h-10 w-10 grid place-items-center rounded-md transition-colors ${navTheme.iconButton}`}
                     >
                         {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
@@ -131,14 +137,14 @@ export function Navbar() {
                         type="button"
                         className={`rounded-md p-1.5 ${navTheme.iconButton}`}
                         onClick={toggleTheme}
-                        aria-label="Toggle theme"
+                        aria-label={copy.toggleTheme}
                     >
                         {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
                     </button>
                     <button
                         className={`rounded-md p-1.5 ${navTheme.iconButton}`}
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        aria-label="Toggle menu"
+                        aria-label={copy.toggleMenu}
                     >
                         {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
                     </button>

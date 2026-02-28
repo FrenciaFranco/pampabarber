@@ -2,22 +2,39 @@
 
 import { motion } from "framer-motion";
 import { Scissors, VenetianMask, Watch } from "lucide-react";
+import { usePreferences } from "@/components/PreferencesProvider";
 
 export function Claims() {
+    const { language } = usePreferences();
     const claims = [
         {
-            title: "Cortes precisos",
-            desc: "Técnica impecable y atención al detalle en cada trazo.",
+            title: language === "en" ? "Precise haircuts" : language === "ca" ? "Talls precisos" : "Cortes precisos",
+            desc:
+                language === "en"
+                    ? "Impeccable technique and close attention to detail in every line."
+                    : language === "ca"
+                        ? "Tecnica impecable i atencio al detall en cada traç."
+                        : "Tecnica impecable y atencion al detalle en cada trazo.",
             icon: <Scissors className="w-6 h-6 text-neutral-900 dark:text-neutral-100" strokeWidth={1.5} />,
         },
         {
-            title: "Barbas perfectas",
-            desc: "Perfilado milimétrico y cuidado facial superior.",
+            title: language === "en" ? "Perfect beards" : language === "ca" ? "Barbes perfectes" : "Barbas perfectas",
+            desc:
+                language === "en"
+                    ? "Millimetric shaping and premium face care."
+                    : language === "ca"
+                        ? "Perfilat milimetric i cura facial superior."
+                        : "Perfilado milimetrico y cuidado facial superior.",
             icon: <VenetianMask className="w-6 h-6 text-neutral-900 dark:text-neutral-100" strokeWidth={1.5} />,
         },
         {
-            title: "Ritual minimalista",
-            desc: "Tu tiempo valorado en un entorno libre de distracciones.",
+            title: language === "en" ? "Minimal ritual" : language === "ca" ? "Ritual minimalista" : "Ritual minimalista",
+            desc:
+                language === "en"
+                    ? "Your time matters in a distraction-free setting."
+                    : language === "ca"
+                        ? "Valorem el teu temps en un entorn sense distraccions."
+                        : "Tu tiempo valorado en un entorno libre de distracciones.",
             icon: <Watch className="w-6 h-6 text-neutral-900 dark:text-neutral-100" strokeWidth={1.5} />,
         },
     ];

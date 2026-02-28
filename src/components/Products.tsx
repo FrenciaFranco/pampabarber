@@ -8,47 +8,92 @@ import { usePreferences } from "@/components/PreferencesProvider";
 
 interface ProductItem {
     id: number;
-    name: string;
+    name: { es: string; en: string; ca: string };
     priceEur: number;
     image: string;
-    description: string;
+    description: { es: string; en: string; ca: string };
 }
 
 const products: ProductItem[] = [
     {
         id: 1,
-        name: "Cera para el pelo",
+        name: { es: "Cera para el pelo", en: "Hair wax", ca: "Cera per al cabell" },
         priceEur: 19.9,
         image: "/products/cera.png",
-        description: "Fijación fuerte con acabado mate natural para un estilo duradero."
+        description: {
+            es: "Fijacion fuerte con acabado mate natural para un estilo duradero.",
+            en: "Strong hold with a natural matte finish for long-lasting style.",
+            ca: "Fixacio forta amb acabat mat natural per a un estil durador.",
+        }
     },
     {
         id: 2,
-        name: "Aceite de barba",
+        name: { es: "Aceite de barba", en: "Beard oil", ca: "Oli de barba" },
         priceEur: 24.9,
         image: "/products/aceite.png",
-        description: "Hidrata y suaviza tu barba, con un exclusivo aroma amaderado."
+        description: {
+            es: "Hidrata y suaviza tu barba, con un exclusivo aroma amaderado.",
+            en: "Hydrates and softens your beard, with an exclusive woody scent.",
+            ca: "Hidrata i suavitza la barba, amb una aroma fustosa exclusiva.",
+        }
     },
     {
         id: 3,
-        name: "Navaja de afeitar",
+        name: { es: "Navaja de afeitar", en: "Straight razor", ca: "Navalla d'afaitar" },
         priceEur: 39.9,
         image: "/products/navaja.png",
-        description: "Consigue la precisión de un barbero profesional desde casa."
+        description: {
+            es: "Consigue la precision de un barbero profesional desde casa.",
+            en: "Get professional barber precision at home.",
+            ca: "Aconsegueix precisio de barber professional des de casa.",
+        }
     },
     {
         id: 4,
-        name: "Máquina / cortapelos",
+        name: { es: "Maquina / cortapelos", en: "Clipper machine", ca: "Maquina / talla-cabells" },
         priceEur: 89.9,
         image: "/products/maquina.png",
-        description: "Potencia y precisión excepcionales para cortes perfectos."
+        description: {
+            es: "Potencia y precision excepcionales para cortes perfectos.",
+            en: "Exceptional power and precision for perfect cuts.",
+            ca: "Potencia i precisio excepcionals per a talls perfectes.",
+        }
     }
 ];
 
 export function Products() {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const carouselRef = useRef<HTMLDivElement>(null);
-    const { formatFromEur } = usePreferences();
+    const { language, formatFromEur } = usePreferences();
+    const copy = language === "en"
+        ? {
+            title: "Our products",
+            subtitle: "Keep your best version at home with our line of products and pro-level tools.",
+            prevProduct: "Previous product",
+            nextProduct: "Next product",
+            addToCart: "Add to cart",
+            expandedProduct: "Expanded product",
+            whatsappMessage: (productName: string) => `Hi, I want to buy this product: ${productName}`,
+        }
+        : language === "ca"
+            ? {
+                title: "Els nostres productes",
+                subtitle: "Mantingues la teva millor versio a casa amb la nostra linia de productes i eines professionals.",
+                prevProduct: "Producte anterior",
+                nextProduct: "Producte seguent",
+                addToCart: "Afegir al carret",
+                expandedProduct: "Producte ampliat",
+                whatsappMessage: (productName: string) => `Hola, vull comprar aquest producte: ${productName}`,
+            }
+            : {
+                title: "Nuestros productos",
+                subtitle: "Manten tu mejor version en casa con nuestra linea de productos y herramientas de nivel profesional.",
+                prevProduct: "Anterior producto",
+                nextProduct: "Siguiente producto",
+                addToCart: "Agregar al carrito",
+                expandedProduct: "Producto ampliado",
+                whatsappMessage: (productName: string) => `Hola, quisiera comprar el producto: ${productName}`,
+            };
 
     const scroll = (direction: "left" | "right") => {
         if (carouselRef.current) {
@@ -68,9 +113,9 @@ export function Products() {
             <div className="relative max-w-6xl mx-auto px-4 sm:px-6 md:px-12">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
                     <div>
-                        <h2 className="font-serif text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-4 tracking-tight transition-colors duration-500">Nuestros productos</h2>
+                        <h2 className="font-serif text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-4 tracking-tight transition-colors duration-500">{copy.title}</h2>
                         <p className="text-neutral-600 dark:text-neutral-300 font-light text-lg max-w-xl transition-colors duration-500">
-                            Mantén tu mejor versión en casa con nuestra línea de productos y herramientas de nivel profesional.
+                            {copy.subtitle}
                         </p>
                     </div>
 
@@ -97,7 +142,7 @@ export function Products() {
                     {/* Carousel Container */}
                     <div
                         ref={carouselRef}
-                        className="flex overflow-x-auto gap-3 md:gap-6 pb-8 md:pb-14 pt-2 md:pt-4 snap-x snap-mandatory scrollbar-hide scroll-smooth touch-pan-x"
+                        className="flex overflow-x-auto gap-3 md:gap-6 pb-8 md:pb-14 pt-2 md:pt-4 snap-x snap-mandatory scrollbar-hide scroll-smooth touch-auto"
                     >
                         {products.map((product) => (
                             <div
@@ -114,7 +159,7 @@ export function Products() {
                                     <div className="absolute inset-0 bg-white/50 dark:bg-[radial-gradient(circle_at_center,rgba(214,175,105,0.12),transparent_65%)] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                                     <Image
                                         src={product.image}
-                                        alt={product.name}
+                                        alt={product.name[language]}
                                         width={300}
                                         height={300}
                                         className="object-contain h-full w-full drop-shadow-[0_15px_30px_rgba(0,0,0,0.1)] dark:drop-shadow-[0_15px_30px_rgba(0,0,0,0.7)] transition-transform duration-700 ease-out group-hover:scale-110"
@@ -126,17 +171,22 @@ export function Products() {
 
                                 <div className="p-6 md:p-8 flex flex-col flex-grow border-t border-neutral-100 dark:border-white/5 bg-white dark:bg-[#131a24] relative z-10 transition-colors duration-500">
                                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 gap-2 sm:gap-4">
-                                        <h3 className="text-xl font-medium tracking-tight text-neutral-900 dark:text-white leading-tight">{product.name}</h3>
+                                        <h3 className="text-xl font-medium tracking-tight text-neutral-900 dark:text-white leading-tight">{product.name[language]}</h3>
                                         <span className="text-xl font-serif text-[#b68936] dark:text-[#e4c386] font-semibold tracking-tight shrink-0">{formatFromEur(product.priceEur)}</span>
                                     </div>
-                                    <p className="text-neutral-600 dark:text-neutral-400 text-sm font-light mb-8 flex-grow">{product.description}</p>
+                                    <p className="text-neutral-600 dark:text-neutral-400 text-sm font-light mb-8 flex-grow">{product.description[language]}</p>
 
                                     <button
-                                        onClick={() => window.open(`https://wa.me/34689745124?text=Hola,%20quisiera%20comprar%20el%20producto:%20${encodeURIComponent(product.name)}`, '_blank')}
+                                        onClick={() =>
+                                            window.open(
+                                                `https://wa.me/34689745124?text=${encodeURIComponent(copy.whatsappMessage(product.name[language]))}`,
+                                                "_blank"
+                                            )
+                                        }
                                         className="inline-flex w-full justify-center items-center gap-2 rounded-xl border border-neutral-200 dark:border-[#9c7b45]/35 bg-neutral-50 dark:bg-[#1a2230] px-4 py-3 text-[15px] font-semibold text-neutral-800 dark:text-[#f2e6cc] transition-all duration-300 hover:bg-neutral-100 dark:hover:border-[#e1bb79]/65 dark:hover:bg-[#2a2115] dark:hover:text-[#f6d9a2] hover:shadow-sm dark:hover:shadow-[0_0_24px_rgba(225,187,121,0.22)] group/btn"
                                     >
                                         <ShoppingBag size={18} />
-                                        Agregar al carrito
+                                        {copy.addToCart}
                                     </button>
                                 </div>
                             </div>
@@ -147,14 +197,14 @@ export function Products() {
                         <button
                             onClick={() => scroll("left")}
                             className="h-10 w-10 rounded-full border border-neutral-300 dark:border-white/10 bg-white dark:bg-white/5 flex items-center justify-center text-neutral-500 dark:text-white/70"
-                            aria-label="Anterior producto"
+                            aria-label={copy.prevProduct}
                         >
                             <ChevronLeft size={20} />
                         </button>
                         <button
                             onClick={() => scroll("right")}
                             className="h-10 w-10 rounded-full border border-neutral-300 dark:border-white/10 bg-white dark:bg-white/5 flex items-center justify-center text-neutral-500 dark:text-white/70"
-                            aria-label="Siguiente producto"
+                            aria-label={copy.nextProduct}
                         >
                             <ChevronRight size={20} />
                         </button>
@@ -188,7 +238,7 @@ export function Products() {
                         >
                             <Image
                                 src={selectedImage}
-                                alt="Producto ampliado"
+                                alt={copy.expandedProduct}
                                 fill
                                 className="object-contain"
                             />

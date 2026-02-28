@@ -2,8 +2,71 @@
 
 import { motion } from "framer-motion";
 import { BOOKSY_BARBERS } from "@/lib/booksy";
+import { usePreferences } from "@/components/PreferencesProvider";
 
 export function Barbers() {
+  const { language } = usePreferences();
+  const copy =
+    language === "en"
+      ? {
+          title: "Barbers.",
+          subtitle: "Professionals specialized in haircuts and beard work, with personalized attention.",
+          altPrefix: "Barber",
+        }
+      : language === "ca"
+        ? {
+            title: "Barbers.",
+            subtitle: "Professionals especialitzats en tall i barba, amb atencio personalitzada.",
+            altPrefix: "Barber",
+          }
+        : {
+            title: "Barberos.",
+            subtitle: "Profesionales especializados en corte y barba, con atencion personalizada.",
+            altPrefix: "Barbero",
+          };
+
+  const barberDetailsByName: Record<string, { role: string; experience: string; details: string }> =
+    language === "en"
+      ? {
+          Octavio: {
+            role: "Barber",
+            experience: "15 years of experience",
+            details: "Design specialist. He has worked in several countries, including Argentina and Portugal.",
+          },
+          Freli: {
+            role: "Barber",
+            experience: "10 years of experience",
+            details: "Specialist in haircut and beard care with strong attention to detail. He has worked in Ecuador.",
+          },
+        }
+      : language === "ca"
+        ? {
+            Octavio: {
+              role: "Barber",
+              experience: "15 anys d'experiencia",
+              details: "Especialista en disseny. Ha treballat en diversos paisos, com Argentina i Portugal.",
+            },
+            Freli: {
+              role: "Barber",
+              experience: "10 anys d'experiencia",
+              details:
+                "Especialista en tall i barba amb atencio al detall. Ha treballat en diversos paisos, com l'Equador.",
+            },
+          }
+        : {
+            Octavio: {
+              role: "Barbero",
+              experience: "15 anos de experiencia",
+              details: "Especialista en diseno. Ha trabajado en varios paises del mundo, como Argentina y Portugal.",
+            },
+            Freli: {
+              role: "Barbero",
+              experience: "10 anos de experiencia",
+              details:
+                "Especialista en corte y barba con atencion al detalle. Ha trabajado en varios paises del mundo, como Ecuador.",
+            },
+          };
+
   return (
     <section id="barberos" className="relative py-24 bg-white dark:bg-neutral-950 overflow-hidden">
       {/* Subtle background glow for glass effect */}
@@ -13,10 +76,10 @@ export function Barbers() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div>
             <h2 className="font-serif text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-4 tracking-tight">
-              Barberos.
+              {copy.title}
             </h2>
             <p className="text-neutral-500 dark:text-neutral-400 font-light text-lg max-w-2xl">
-              Profesionales especializados en corte y barba, con atencion personalizada.
+              {copy.subtitle}
             </p>
           </div>
         </div>
@@ -36,7 +99,7 @@ export function Barbers() {
               <div className="relative z-10 flex items-center gap-4 md:gap-5">
                 <img
                   src={barber.image}
-                  alt={`Barbero ${barber.name} en PAMPA Barber`}
+                  alt={`${copy.altPrefix} ${barber.name} en PAMPA Barber`}
                   className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-2 border-white/80 dark:border-white/10 shadow-sm"
                   loading="lazy"
                 />
@@ -49,9 +112,9 @@ export function Barbers() {
                       </span>
                     )}
                   </div>
-                  <p className="text-neutral-500 dark:text-neutral-400 font-light">{barber.role}</p>
-                  <p className="text-sm text-neutral-700 dark:text-neutral-300 mt-2">{barber.experience}</p>
-                  <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">{barber.details}</p>
+                  <p className="text-neutral-500 dark:text-neutral-400 font-light">{barberDetailsByName[barber.name]?.role ?? barber.role}</p>
+                  <p className="text-sm text-neutral-700 dark:text-neutral-300 mt-2">{barberDetailsByName[barber.name]?.experience ?? barber.experience}</p>
+                  <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">{barberDetailsByName[barber.name]?.details ?? barber.details}</p>
                 </div>
               </div>
             </motion.article>

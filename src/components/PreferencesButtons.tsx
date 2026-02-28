@@ -7,6 +7,27 @@ import { usePreferences, type Currency, type Language } from "@/components/Prefe
 export function PreferencesButtons() {
   const { language, setLanguage, currency, setCurrency } = usePreferences();
   const [open, setOpen] = useState<"language" | "currency" | null>(null);
+  const copy =
+    language === "en"
+      ? {
+          currency: "Currency",
+          language: "Language",
+          selectCurrency: "Select currency",
+          selectLanguage: "Select language",
+        }
+      : language === "ca"
+        ? {
+            currency: "Moneda",
+            language: "Idioma",
+            selectCurrency: "Selecciona moneda",
+            selectLanguage: "Selecciona idioma",
+          }
+        : {
+            currency: "Moneda",
+            language: "Idioma",
+            selectCurrency: "Seleccionar moneda",
+            selectLanguage: "Seleccionar idioma",
+          };
 
   useEffect(() => {
     const close = () => setOpen(null);
@@ -33,7 +54,7 @@ export function PreferencesButtons() {
       <div className="relative">
         {open === "currency" && (
           <div className="absolute bottom-14 right-0 w-44 rounded-xl border border-[#8a6a37]/50 bg-[#0b0d11] p-1 text-[#f2e4c6] shadow-[0_24px_56px_rgba(0,0,0,0.6)]">
-            <p className="px-3 pt-2 pb-1 text-[10px] uppercase tracking-widest text-neutral-300">Currency</p>
+            <p className="px-3 pt-2 pb-1 text-[10px] uppercase tracking-widest text-neutral-300">{copy.currency}</p>
             {currencyOptions.map((option) => (
               <button
                 key={option.code}
@@ -53,7 +74,7 @@ export function PreferencesButtons() {
           type="button"
           onClick={() => setOpen((prev) => (prev === "currency" ? null : "currency"))}
           className="h-10 md:h-12 px-2.5 md:px-3 rounded-full border border-[#a8884b] bg-gradient-to-br from-[#2a2117] via-[#3a2c1d] to-[#5b4528] text-[#f7e7c1] shadow-[0_14px_28px_-10px_rgba(35,25,15,0.75)] inline-flex items-center gap-1.5 md:gap-2"
-          aria-label="Select currency"
+          aria-label={copy.selectCurrency}
         >
           <CircleDollarSign size={15} />
           <span className="text-xs font-semibold">{currency}</span>
@@ -64,7 +85,7 @@ export function PreferencesButtons() {
       <div className="relative">
         {open === "language" && (
           <div className="absolute bottom-14 right-0 w-44 rounded-xl border border-[#8a6a37]/50 bg-[#0b0d11] p-1 text-[#f2e4c6] shadow-[0_24px_56px_rgba(0,0,0,0.6)]">
-            <p className="px-3 pt-2 pb-1 text-[10px] uppercase tracking-widest text-neutral-300">Language</p>
+            <p className="px-3 pt-2 pb-1 text-[10px] uppercase tracking-widest text-neutral-300">{copy.language}</p>
             {languageOptions.map((option) => (
               <button
                 key={option.code}
@@ -84,7 +105,7 @@ export function PreferencesButtons() {
           type="button"
           onClick={() => setOpen((prev) => (prev === "language" ? null : "language"))}
           className="h-10 md:h-12 px-2.5 md:px-3 rounded-full border border-[#a8884b] bg-gradient-to-br from-[#131821] via-[#1b2330] to-[#2a3546] text-[#f7e7c1] shadow-[0_14px_28px_-10px_rgba(12,16,24,0.75)] inline-flex items-center gap-1.5 md:gap-2"
-          aria-label="Select language"
+          aria-label={copy.selectLanguage}
         >
           <Languages size={15} />
           <span className="text-xs font-semibold">{language.toUpperCase()}</span>

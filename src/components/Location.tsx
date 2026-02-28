@@ -2,14 +2,15 @@
 
 import { useState } from "react";
 import { Check, Copy, Map, MapPin } from "lucide-react";
+import { usePreferences } from "@/components/PreferencesProvider";
 
-type BranchStatus = "Abierta" | "Proxima apertura";
+type BranchStatus = "open" | "comingSoon";
 
 interface Branch {
     id: string;
     city: string;
-    zone: string;
-    address: string;
+    zone: { es: string; en: string; ca: string };
+    address: { es: string; en: string; ca: string };
     status: BranchStatus;
     image: string;
     mapsUrl: string;
@@ -17,14 +18,64 @@ interface Branch {
 }
 
 export function Location() {
+    const { language } = usePreferences();
     const [copied, setCopied] = useState(false);
+    const copy = language === "en"
+        ? {
+            title: "Our barbershops",
+            subtitle: "Barcelona (Meridiana) is already open. Coming soon: Barcelona (Sagrada Familia) and Madrid (Retiro).",
+            selectedBranch: "Selected branch",
+            copiedAddress: "Address copied",
+            copyAddress: "Copy address",
+            viewOnMap: "View on map",
+            hint: "Select a barbershop to see its location.",
+            openInGoogleMaps: "Open in Google Maps",
+            branchPhotos: "Barbershop photos",
+            noPhotos: "There are no published photos for this barbershop yet.",
+            mapTitle: "Map of",
+            status: { open: "Open", comingSoon: "Coming soon" },
+        }
+        : language === "ca"
+            ? {
+                title: "Les nostres barberies",
+                subtitle: "Barcelona (Meridiana) ja esta oberta. Proximes obertures: Barcelona (Sagrada Familia) i Madrid (Retiro).",
+                selectedBranch: "Sucursal seleccionada",
+                copiedAddress: "Adreca copiada",
+                copyAddress: "Copiar adreca",
+                viewOnMap: "Veure al mapa",
+                hint: "Selecciona una barberia per veure'n la ubicacio.",
+                openInGoogleMaps: "Obrir a Google Maps",
+                branchPhotos: "Fotos de la nostra barberia",
+                noPhotos: "Encara no hi ha fotos publicades per a aquesta barberia.",
+                mapTitle: "Mapa de",
+                status: { open: "Oberta", comingSoon: "Propera obertura" },
+            }
+            : {
+                title: "Nuestras barberias",
+                subtitle: "Barcelona (Meridiana) ya abierta. Proximas aperturas: Barcelona (Sagrada Familia) y Madrid (Retiro).",
+                selectedBranch: "Sucursal seleccionada",
+                copiedAddress: "Direccion copiada",
+                copyAddress: "Copiar direccion",
+                viewOnMap: "Ver en mapa",
+                hint: "Selecciona una barberia para ver su ubicacion.",
+                openInGoogleMaps: "Abrir en Google Maps",
+                branchPhotos: "Fotos de nuestra barberia",
+                noPhotos: "Aun no hay fotos publicadas para esta barberia.",
+                mapTitle: "Mapa de",
+                status: { open: "Abierta", comingSoon: "Proxima apertura" },
+            };
+
     const branches: Branch[] = [
         {
             id: "barcelona-meridiana",
             city: "Barcelona",
-            zone: "Meridiana",
-            address: "Avinguda Meridiana, 1, Local 2, 08018, Barcelona",
-            status: "Abierta",
+            zone: { es: "Meridiana", en: "Meridiana", ca: "Meridiana" },
+            address: {
+                es: "Avinguda Meridiana, 1, Local 2, 08018, Barcelona",
+                en: "Avinguda Meridiana, 1, Local 2, 08018, Barcelona",
+                ca: "Avinguda Meridiana, 1, Local 2, 08018, Barcelona",
+            },
+            status: "open",
             image:
                 "https://d375139ucebi94.cloudfront.net/region2/es/121866/biz_photo/90957f91ef98499bbdc3a0fa5af429-pampa-barber-biz-photo-fb9271bc6e6a49f6b33c0dae56901d-booksy.jpeg",
             mapsUrl: "https://maps.app.goo.gl/1FYCZyfpktLx4L8q8",
@@ -33,9 +84,13 @@ export function Location() {
         {
             id: "barcelona-sagrada-familia",
             city: "Barcelona",
-            zone: "Sagrada Familia",
-            address: "Zona Sagrada Familia, Barcelona (proxima apertura)",
-            status: "Proxima apertura",
+            zone: { es: "Sagrada Familia", en: "Sagrada Familia", ca: "Sagrada Familia" },
+            address: {
+                es: "Zona Sagrada Familia, Barcelona (proxima apertura)",
+                en: "Sagrada Familia area, Barcelona (coming soon)",
+                ca: "Zona Sagrada Familia, Barcelona (propera obertura)",
+            },
+            status: "comingSoon",
             image:
                 "https://offloadmedia.feverup.com/barcelonasecreta.com/wp-content/uploads/2015/07/13082736/shutterstock_580489630-1.jpg",
             mapsUrl: "https://maps.google.com/?q=Sagrada+Familia,Barcelona",
@@ -44,9 +99,13 @@ export function Location() {
         {
             id: "madrid-retiro",
             city: "Madrid",
-            zone: "Retiro",
-            address: "Zona Retiro, Madrid (proxima apertura)",
-            status: "Proxima apertura",
+            zone: { es: "Retiro", en: "Retiro", ca: "Retiro" },
+            address: {
+                es: "Zona Retiro, Madrid (proxima apertura)",
+                en: "Retiro area, Madrid (coming soon)",
+                ca: "Zona Retiro, Madrid (propera obertura)",
+            },
+            status: "comingSoon",
             image:
                 "https://images.unsplash.com/photo-1543783207-ec64e4d95325?auto=format&fit=crop&w=1600&q=80",
             mapsUrl: "https://maps.google.com/?q=Parque+del+Retiro,Madrid",
@@ -64,7 +123,7 @@ export function Location() {
     const selectedBranch = branches.find((branch) => branch.id === selectedBranchId) ?? branches[0];
 
     const copyToClipboard = () => {
-        navigator.clipboard.writeText(selectedBranch.address);
+        navigator.clipboard.writeText(selectedBranch.address[language]);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     };
@@ -76,9 +135,9 @@ export function Location() {
 
             <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
                 <div className="mb-10 md:mb-14">
-                    <h2 className="font-serif text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-5 tracking-tight">Nuestras barberias</h2>
+                    <h2 className="font-serif text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-5 tracking-tight">{copy.title}</h2>
                     <p className="text-neutral-600 dark:text-neutral-400 font-light text-lg max-w-2xl leading-relaxed">
-                        Barcelona (Meridiana) ya abierta. Proximas aperturas: Barcelona (Sagrada Familia) y Madrid (Retiro).
+                        {copy.subtitle}
                     </p>
                 </div>
 
@@ -103,7 +162,7 @@ export function Location() {
                                 <div className="aspect-[4/5] overflow-hidden bg-neutral-200 dark:bg-neutral-800">
                                     <img
                                         src={branch.image}
-                                        alt={`${branch.city} ${branch.zone}`}
+                                        alt={`${branch.city} ${branch.zone[language]}`}
                                         className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                                         loading="lazy"
                                     />
@@ -113,17 +172,17 @@ export function Location() {
 
                                 <span
                                     className={`absolute right-3 top-3 z-20 text-[11px] uppercase tracking-[0.14em] px-2.5 py-1 rounded-full ${
-                                        branch.status === "Abierta" ? "bg-emerald-500/90" : "bg-white/20 backdrop-blur"
+                                        branch.status === "open" ? "bg-emerald-500/90" : "bg-white/20 backdrop-blur"
                                     }`}
                                 >
-                                    {branch.status}
+                                    {copy.status[branch.status]}
                                 </span>
 
                                 <div className="absolute inset-x-0 bottom-0 p-5 text-white">
                                     <div className="flex items-center justify-between gap-3 mb-2">
                                         <h3 className="font-serif text-2xl leading-none">{branch.city}</h3>
                                     </div>
-                                    <p className="text-sm text-white/85">{branch.zone}</p>
+                                    <p className="text-sm text-white/85">{branch.zone[language]}</p>
                                 </div>
                             </button>
                         );
@@ -135,12 +194,12 @@ export function Location() {
                         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neutral-300/50 dark:via-white/20 to-transparent opacity-100" />
                         
                         <div className="relative z-10">
-                            <h3 className="text-[11px] uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-500 font-bold mb-5">Sucursal seleccionada</h3>
+                            <h3 className="text-[11px] uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-500 font-bold mb-5">{copy.selectedBranch}</h3>
                             <p className="font-serif text-3xl md:text-4xl text-neutral-900 dark:text-white mb-3 tracking-tight">
                                 {selectedBranch.city}
-                                <span className="text-neutral-500 dark:text-neutral-400 font-light"> ({selectedBranch.zone})</span>
+                                <span className="text-neutral-500 dark:text-neutral-400 font-light"> ({selectedBranch.zone[language]})</span>
                             </p>
-                            <p className="font-light text-neutral-600 dark:text-neutral-300 mb-8 leading-relaxed text-lg">{selectedBranch.address}</p>
+                            <p className="font-light text-neutral-600 dark:text-neutral-300 mb-8 leading-relaxed text-lg">{selectedBranch.address[language]}</p>
 
                             <div className="flex flex-col sm:flex-row flex-wrap gap-4">
                                 <button
@@ -149,7 +208,7 @@ export function Location() {
                                     className="group inline-flex items-center justify-center gap-2.5 text-sm font-medium text-neutral-900 dark:text-white border border-neutral-300 dark:border-white/20 bg-white/50 dark:bg-white/5 backdrop-blur-md px-5 py-3 rounded-xl hover:border-neutral-900 dark:hover:border-white/40 hover:bg-white dark:hover:bg-white/10 transition-all shadow-sm"
                                 >
                                     {copied ? <Check size={16} className="text-emerald-600 dark:text-emerald-400" /> : <Copy size={16} />}
-                                    <span>{copied ? "Dirección copiada" : "Copiar dirección"}</span>
+                                    <span>{copied ? copy.copiedAddress : copy.copyAddress}</span>
                                 </button>
 
                                 <a
@@ -159,13 +218,13 @@ export function Location() {
                                     className="inline-flex items-center justify-center gap-2.5 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 px-6 py-3 rounded-xl font-medium hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-all shadow-md"
                                 >
                                     <Map size={17} />
-                                    Ver en mapa
+                                    {copy.viewOnMap}
                                 </a>
                             </div>
 
                             <div className="mt-8 pt-6 border-t border-neutral-200/50 dark:border-white/10 text-sm text-neutral-500 dark:text-neutral-400 flex items-center gap-3">
                                 <MapPin size={16} className="text-neutral-400 dark:text-neutral-500" />
-                                <span>Selecciona una barberia para ver su ubicacion.</span>
+                                <span>{copy.hint}</span>
                             </div>
                         </div>
                     </div>
@@ -173,7 +232,7 @@ export function Location() {
                     <div className="lg:col-span-3 min-h-[420px] relative border border-neutral-200/60 dark:border-white/10 overflow-hidden rounded-3xl bg-neutral-100 dark:bg-neutral-900 shadow-sm dark:shadow-2xl">
                         <iframe
                             key={selectedBranch.id}
-                            title={`Mapa de ${selectedBranch.city} ${selectedBranch.zone}`}
+                            title={`${copy.mapTitle} ${selectedBranch.city} ${selectedBranch.zone[language]}`}
                             src={selectedBranch.mapsEmbed}
                             className="absolute inset-0 w-full h-full"
                             loading="lazy"
@@ -188,21 +247,21 @@ export function Location() {
                                 className="pointer-events-auto inline-flex items-center gap-2 bg-white text-neutral-900 px-4 py-2 text-sm font-medium hover:bg-neutral-100 transition-colors"
                             >
                                 <Map size={16} />
-                                Abrir en Google Maps
+                                {copy.openInGoogleMaps}
                             </a>
                         </div>
                     </div>
                 </div>
 
                 <div className="mt-6 md:mt-10">
-                    <h3 className="font-serif text-2xl md:text-3xl text-neutral-900 dark:text-white mb-4 tracking-tight">Fotos de nuestra barberia</h3>
+                    <h3 className="font-serif text-2xl md:text-3xl text-neutral-900 dark:text-white mb-4 tracking-tight">{copy.branchPhotos}</h3>
                     {(branchPhotosById[selectedBranch.id] ?? []).length > 0 ? (
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {(branchPhotosById[selectedBranch.id] ?? []).map((photo) => (
                                 <div key={photo} className="overflow-hidden rounded-2xl border border-neutral-200 dark:border-white/10 bg-neutral-100 dark:bg-neutral-900">
                                     <img
                                         src={photo}
-                                        alt={`PAMPA Barber ${selectedBranch.zone}`}
+                                        alt={`PAMPA Barber ${selectedBranch.zone[language]}`}
                                         className="w-full h-[260px] md:h-[320px] object-cover"
                                         loading="lazy"
                                     />
@@ -211,7 +270,7 @@ export function Location() {
                         </div>
                     ) : (
                         <p className="text-neutral-500 dark:text-neutral-400 text-sm">
-                            Aun no hay fotos publicadas para esta barberia.
+                            {copy.noPhotos}
                         </p>
                     )}
                 </div>

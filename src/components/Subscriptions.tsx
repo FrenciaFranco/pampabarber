@@ -5,53 +5,53 @@ import { usePreferences } from "@/components/PreferencesProvider";
 
 interface Plan {
     id: string;
-    name: { es: string; en: string };
+    name: { es: string; en: string; ca: string };
     priceEur: number;
     cuts: number;
     beard: number;
     details?: number;
     facialClean?: number;
-    product: { es: string; en: string };
+    product: { es: string; en: string; ca: string };
     highlight?: boolean;
 }
 
 const plans: Plan[] = [
     {
         id: "essential",
-        name: { es: "Plan Essential", en: "Essential Plan" },
+        name: { es: "Plan Essential", en: "Essential Plan", ca: "Pla Essential" },
         priceEur: 100,
         cuts: 4,
         beard: 4,
-        product: { es: "1 cera para el pelo", en: "1 hair wax" },
+        product: { es: "1 cera para el pelo", en: "1 hair wax", ca: "1 cera per al cabell" },
     },
     {
         id: "signature",
-        name: { es: "Plan Signature", en: "Signature Plan" },
+        name: { es: "Plan Signature", en: "Signature Plan", ca: "Pla Signature" },
         priceEur: 150,
         cuts: 6,
         beard: 6,
         details: 2,
         facialClean: 1,
-        product: { es: "1 aceite de barba", en: "1 beard oil" },
+        product: { es: "1 aceite de barba", en: "1 beard oil", ca: "1 oli de barba" },
         highlight: true,
     },
     {
         id: "elite",
-        name: { es: "Plan Elite", en: "Elite Plan" },
+        name: { es: "Plan Elite", en: "Elite Plan", ca: "Pla Elite" },
         priceEur: 200,
         cuts: 8,
         beard: 8,
         details: 4,
         facialClean: 2,
-        product: { es: "1 producto premium a elegir", en: "1 premium product of your choice" },
+        product: { es: "1 producto premium a elegir", en: "1 premium product of your choice", ca: "1 producte premium a escollir" },
     },
 ];
 
 export function Subscriptions() {
     const { language, formatFromEur } = usePreferences();
-    const contentLanguage = language === "ca" ? "es" : language;
+    const contentLanguage = language;
 
-    const copy = contentLanguage === "en"
+    const copy = language === "en"
         ? {
             title: "Subscriptions",
             subtitle: "Monthly plans that combine cuts, beard care, and products at a better value.",
@@ -65,7 +65,21 @@ export function Subscriptions() {
             badge: "Most popular",
             note: "Monthly subscriptions. Renew and keep your routine always covered.",
         }
-        : {
+        : language === "ca"
+            ? {
+                title: "Subscripcions",
+                subtitle: "Plans mensuals que combinen talls, barba i productes amb millor valor.",
+                monthly: "mensual",
+                cuts: "talls",
+                beard: "serveis de barba",
+                details: "detalls",
+                facialClean: "netejes facials",
+                includesProduct: "Inclou",
+                cta: "Vull subscriure'm",
+                badge: "Mes triat",
+                note: "Subscripcions mensuals. Renova cada mes i mante la teva rutina sempre coberta.",
+            }
+            : {
             title: "Suscripciones",
             subtitle: "Planes mensuales que combinan cortes, barba y productos con mejor valor.",
             monthly: "mensual",
@@ -150,8 +164,10 @@ export function Subscriptions() {
 
                             <a
                                 href={`https://wa.me/34689745124?text=${encodeURIComponent(contentLanguage === "en"
-                                    ? `Hi, I want the ${plan.name.en} monthly subscription.`
-                                    : `Hola, quiero la suscripcion mensual ${plan.name.es}.`)}`}
+                                        ? `Hi, I want the ${plan.name.en} monthly subscription.`
+                                        : language === "ca"
+                                        ? `Hola, vull la subscripcio mensual ${plan.name.ca}.`
+                                        : `Hola, quiero la suscripcion mensual ${plan.name.es}.`)}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="relative z-10 inline-flex w-full justify-center items-center rounded-xl border border-neutral-200 dark:border-[#9c7b45]/35 bg-neutral-50 dark:bg-[#1a2230] px-4 py-3 text-[15px] font-semibold text-neutral-800 dark:text-[#f2e6cc] transition-all duration-300 hover:bg-neutral-100 dark:hover:border-[#e1bb79]/65 dark:hover:bg-[#2a2115] dark:hover:text-[#f6d9a2]"

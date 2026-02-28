@@ -4,8 +4,10 @@ import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Instagram, X, ZoomIn, ZoomOut } from "lucide-react";
 import { BOOKSY_GALLERY_IMAGES } from "@/lib/booksy";
+import { usePreferences } from "@/components/PreferencesProvider";
 
 export function Gallery() {
+    const { language } = usePreferences();
     const images = useMemo(
         () => BOOKSY_GALLERY_IMAGES.filter((image) => image.includes("/inspiration/")),
         []
@@ -55,14 +57,56 @@ export function Gallery() {
         setZoomLevel((prev) => Math.max(prev - 0.25, 1));
     };
 
+    const copy = language === "en"
+        ? {
+            title: "Style.",
+            subtitle: "Real cuts, clean finishes, and studio details in a more visual and modern format.",
+            prevPhoto: "Previous photo",
+            nextPhoto: "Next photo",
+            goToPhoto: "Go to photo",
+            closeZoom: "Close zoom",
+            zoomOut: "Zoom out",
+            zoomIn: "Zoom in",
+            viewFullGallery: "View full gallery",
+            styleAlt: "PAMPA Barber Style",
+            thumbAlt: "Thumbnail",
+        }
+        : language === "ca"
+            ? {
+                title: "Estil.",
+                subtitle: "Talls reals, acabats nets i detalls de l'estudi en un format mes visual i modern.",
+                prevPhoto: "Foto anterior",
+                nextPhoto: "Foto seguent",
+                goToPhoto: "Anar a la foto",
+                closeZoom: "Tancar zoom",
+                zoomOut: "Reduir zoom",
+                zoomIn: "Augmentar zoom",
+                viewFullGallery: "Veure galeria completa",
+                styleAlt: "Estil PAMPA Barber",
+                thumbAlt: "Miniatura",
+            }
+            : {
+                title: "Estilo.",
+                subtitle: "Cortes reales, acabados limpios y detalles del estudio en un formato mas visual y moderno.",
+                prevPhoto: "Foto anterior",
+                nextPhoto: "Foto siguiente",
+                goToPhoto: "Ir a foto",
+                closeZoom: "Cerrar zoom",
+                zoomOut: "Reducir zoom",
+                zoomIn: "Aumentar zoom",
+                viewFullGallery: "Ver galeria completa",
+                styleAlt: "PAMPA Barber Style",
+                thumbAlt: "Miniatura",
+            };
+
     return (
         <section id="estilo" className="py-28 bg-gradient-to-b from-white to-neutral-100/60 dark:from-neutral-950 dark:to-neutral-900/60">
             <div className="max-w-7xl mx-auto px-6 md:px-12">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
                     <div>
-                        <h2 className="font-serif text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-4 tracking-tight">Estilo.</h2>
+                        <h2 className="font-serif text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-4 tracking-tight">{copy.title}</h2>
                         <p className="text-neutral-600 dark:text-neutral-400 font-light text-lg max-w-md leading-relaxed">
-                            Cortes reales, acabados limpios y detalles del estudio en un formato mas visual y moderno.
+                            {copy.subtitle}
                         </p>
                     </div>
                     <a
@@ -96,7 +140,7 @@ export function Gallery() {
                         <motion.img
                             key={images[activeIndex]}
                             src={images[activeIndex]}
-                            alt={`PAMPA Barber Style ${activeIndex + 1}`}
+                            alt={`${copy.styleAlt} ${activeIndex + 1}`}
                             className="relative z-[1] w-full h-full object-contain cursor-zoom-in"
                             initial={{ opacity: 0.2, scale: 1.01 }}
                             animate={{ opacity: 1, scale: 1 }}
@@ -113,7 +157,7 @@ export function Gallery() {
                             <div className="flex items-center gap-2">
                                 <button
                                     type="button"
-                                    aria-label="Foto anterior"
+                                    aria-label={copy.prevPhoto}
                                     onClick={goToPrev}
                                     className="h-10 w-10 rounded-full bg-white/90 text-neutral-900 grid place-items-center hover:bg-white transition-colors"
                                 >
@@ -121,7 +165,7 @@ export function Gallery() {
                                 </button>
                                 <button
                                     type="button"
-                                    aria-label="Foto siguiente"
+                                    aria-label={copy.nextPhoto}
                                     onClick={goToNext}
                                     className="h-10 w-10 rounded-full bg-white/90 text-neutral-900 grid place-items-center hover:bg-white transition-colors"
                                 >
@@ -141,7 +185,7 @@ export function Gallery() {
                                         key={src}
                                         type="button"
                                         onClick={() => setActiveIndex(idx)}
-                                        aria-label={`Ir a foto ${idx + 1}`}
+                                        aria-label={`${copy.goToPhoto} ${idx + 1}`}
                                         className={`relative overflow-hidden rounded-xl border transition-all ${
                                             isActive
                                                 ? "border-neutral-900 dark:border-white ring-2 ring-neutral-900/10 dark:ring-white/20"
@@ -150,7 +194,7 @@ export function Gallery() {
                                     >
                                         <img
                                             src={src}
-                                            alt={`Miniatura ${idx + 1}`}
+                                            alt={`${copy.thumbAlt} ${idx + 1}`}
                                             className="w-full aspect-[4/3] object-cover"
                                             loading="lazy"
                                         />
@@ -172,7 +216,7 @@ export function Gallery() {
                         >
                             <button
                                 type="button"
-                                aria-label="Cerrar zoom"
+                                aria-label={copy.closeZoom}
                                 onClick={closeLightbox}
                                 className="absolute top-4 right-4 z-20 h-10 w-10 rounded-full bg-white/95 text-neutral-900 grid place-items-center"
                             >
@@ -182,7 +226,7 @@ export function Gallery() {
                             <div className="absolute top-4 left-4 z-20 flex items-center gap-2">
                                 <button
                                     type="button"
-                                    aria-label="Reducir zoom"
+                                    aria-label={copy.zoomOut}
                                     onClick={(event) => {
                                         event.stopPropagation();
                                         zoomOut();
@@ -193,7 +237,7 @@ export function Gallery() {
                                 </button>
                                 <button
                                     type="button"
-                                    aria-label="Aumentar zoom"
+                                    aria-label={copy.zoomIn}
                                     onClick={(event) => {
                                         event.stopPropagation();
                                         zoomIn();
@@ -209,7 +253,7 @@ export function Gallery() {
 
                             <button
                                 type="button"
-                                aria-label="Foto anterior"
+                                aria-label={copy.prevPhoto}
                                 onClick={(event) => {
                                     event.stopPropagation();
                                     goToPrev();
@@ -221,7 +265,7 @@ export function Gallery() {
 
                             <button
                                 type="button"
-                                aria-label="Foto siguiente"
+                                aria-label={copy.nextPhoto}
                                 onClick={(event) => {
                                     event.stopPropagation();
                                     goToNext();
@@ -237,7 +281,7 @@ export function Gallery() {
                             >
                                 <img
                                     src={images[activeIndex]}
-                                    alt={`PAMPA Barber Style ${activeIndex + 1}`}
+                                    alt={`${copy.styleAlt} ${activeIndex + 1}`}
                                     className="max-w-[92vw] max-h-[86vh] object-contain select-none"
                                     style={{ transform: `scale(${zoomLevel})`, transformOrigin: "center center" }}
                                 />
@@ -253,7 +297,7 @@ export function Gallery() {
                         rel="noopener noreferrer"
                         className="text-neutral-900 dark:text-white font-medium text-sm border-b border-neutral-900 dark:border-white pb-1 hover:text-neutral-500 hover:border-neutral-500 transition-colors"
                     >
-                        Ver galeria completa
+                        {copy.viewFullGallery}
                     </a>
                 </div>
             </div>

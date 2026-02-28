@@ -7,8 +7,10 @@ import {
     GOOGLE_RATING,
     REVIEWS,
 } from "@/lib/booksy";
+import { usePreferences } from "@/components/PreferencesProvider";
 
 export function Reviews() {
+    const { language } = usePreferences();
     const scrollerRef = useRef<HTMLDivElement>(null);
     const trackRef = useRef<HTMLDivElement>(null);
     const isDraggingRef = useRef(false);
@@ -58,22 +60,48 @@ export function Reviews() {
 
     // Duplicate the reviews for seamless infinite loop
     const duplicated = [...REVIEWS, ...REVIEWS];
+    const copy = language === "en"
+        ? {
+            title: "Reviews.",
+            inBooksy: "on Booksy",
+            inGoogle: "on Google Maps",
+            barberLabel: "Barber",
+            googleReview: "Google Maps Review",
+            booksyReview: "Booksy Review",
+        }
+        : language === "ca"
+            ? {
+                title: "Ressenyes.",
+                inBooksy: "a Booksy",
+                inGoogle: "a Google Maps",
+                barberLabel: "Barber",
+                googleReview: "Ressenya de Google Maps",
+                booksyReview: "Ressenya de Booksy",
+            }
+            : {
+                title: "Resenas.",
+                inBooksy: "en Booksy",
+                inGoogle: "en Google Maps",
+                barberLabel: "Barbero",
+                googleReview: "Resena de Google Maps",
+                booksyReview: "Resena de Booksy",
+            };
 
     return (
         <section id="resenas" className="relative py-32 bg-[#F9F9F9] dark:bg-neutral-950 overflow-hidden">
             <div className="pointer-events-none absolute top-1/2 left-1/4 h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-neutral-200/50 dark:bg-neutral-800/30 blur-[100px]" />
             
             <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 mb-16">
-                <h2 className="font-serif text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-4 tracking-tight">Reseñas.</h2>
+                <h2 className="font-serif text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-4 tracking-tight">{copy.title}</h2>
                 <div className="flex items-center gap-3 flex-wrap">
                     <div className="flex text-yellow-500">
                         {[...Array(5)].map((_, i) => (
                             <Star key={i} size={18} fill="currentColor" className="text-yellow-400" />
                         ))}
                     </div>
-                    <span className="text-neutral-900 dark:text-white font-medium text-lg">{BOOKSY_RATING} en Booksy</span>
+                    <span className="text-neutral-900 dark:text-white font-medium text-lg">{BOOKSY_RATING} {copy.inBooksy}</span>
                     <span className="text-neutral-300 dark:text-neutral-600">|</span>
-                    <span className="text-neutral-900 dark:text-white font-medium text-lg">{GOOGLE_RATING} en Google Maps</span>
+                    <span className="text-neutral-900 dark:text-white font-medium text-lg">{GOOGLE_RATING} {copy.inGoogle}</span>
                 </div>
             </div>
 
@@ -105,7 +133,7 @@ export function Reviews() {
                                 </div>
                                 <div>
                                     <h4 className="font-medium text-neutral-900 dark:text-white">{review.name}</h4>
-                                    <p className="text-neutral-400 text-xs">Barber: {review.barber}</p>
+                                    <p className="text-neutral-400 text-xs">{copy.barberLabel}: {review.barber}</p>
                                     <div className="flex items-center gap-2 mt-1">
                                         <div className="flex text-yellow-400 gap-0.5">
                                             {[...Array(5)].map((_, i) => (
@@ -113,7 +141,7 @@ export function Reviews() {
                                             ))}
                                         </div>
                                         <span className="text-neutral-400 text-[10px] font-medium uppercase tracking-wide">
-                                            {review.source === "Google Maps" ? "Google Maps Review" : "Booksy Review"}
+                                            {review.source === "Google Maps" ? copy.googleReview : copy.booksyReview}
                                         </span>
                                     </div>
                                 </div>

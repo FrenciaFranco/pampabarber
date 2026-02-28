@@ -10,7 +10,7 @@ type Category = "Corte" | "Barba" | "Extra";
 type ServiceGroup = "Combos" | "Corte" | "Barba" | "Detalles";
 
 interface Service {
-    name: { es: string; en: string };
+    name: { es: string; en: string; ca: string };
     durationMinutes: number;
     priceEur: number;
     category: Category[];
@@ -19,22 +19,22 @@ interface Service {
 }
 
 const servicesList: Service[] = [
-    { name: { es: "Corte de cabello", en: "Haircut" }, priceEur: 21, durationMinutes: 45, category: ["Corte"], booksyName: "Corte de cabello", popular: true },
-    { name: { es: "Corte + Barba Express", en: "Haircut + Express Beard" }, priceEur: 29, durationMinutes: 45, category: ["Corte", "Barba"], booksyName: "Corte + Barba Express", popular: true },
-    { name: { es: "Corte + Barba Completa", en: "Haircut + Full Beard" }, priceEur: 33, durationMinutes: 60, category: ["Corte", "Barba"], booksyName: "Corte + Barba Completa", popular: true },
-    { name: { es: "Barba Completa", en: "Full Beard" }, priceEur: 16, durationMinutes: 30, category: ["Barba"], booksyName: "Barba Completa" },
-    { name: { es: "Barba Express", en: "Express Beard" }, priceEur: 12, durationMinutes: 20, category: ["Barba"], booksyName: "Barba Express" },
-    { name: { es: "Corte + Barba Completa + Limpieza facial", en: "Haircut + Full Beard + Facial Clean" }, priceEur: 38, durationMinutes: 60, category: ["Corte", "Barba", "Extra"], booksyName: "Corte + Barba Completa + Limpieza facial" },
-    { name: { es: "Corte + Limpieza facial", en: "Haircut + Facial Clean" }, priceEur: 25, durationMinutes: 45, category: ["Corte", "Extra"], booksyName: "Corte + Limpieza facial" },
-    { name: { es: "Cejas", en: "Eyebrows" }, priceEur: 5, durationMinutes: 15, category: ["Extra"], booksyName: "Cejas" },
-    { name: { es: "Depilación con cera", en: "Waxing" }, priceEur: 10, durationMinutes: 20, category: ["Extra"], booksyName: "Depilación con cera" },
-    { name: { es: "Corte jubilado", en: "Senior Haircut" }, priceEur: 16, durationMinutes: 30, category: ["Corte"], booksyName: "Corte jubilado" },
+    { name: { es: "Corte de cabello", en: "Haircut", ca: "Tall de cabell" }, priceEur: 21, durationMinutes: 45, category: ["Corte"], booksyName: "Corte de cabello", popular: true },
+    { name: { es: "Corte + Barba Express", en: "Haircut + Express Beard", ca: "Tall + Barba Express" }, priceEur: 29, durationMinutes: 45, category: ["Corte", "Barba"], booksyName: "Corte + Barba Express", popular: true },
+    { name: { es: "Corte + Barba Completa", en: "Haircut + Full Beard", ca: "Tall + Barba Completa" }, priceEur: 33, durationMinutes: 60, category: ["Corte", "Barba"], booksyName: "Corte + Barba Completa", popular: true },
+    { name: { es: "Barba Completa", en: "Full Beard", ca: "Barba Completa" }, priceEur: 16, durationMinutes: 30, category: ["Barba"], booksyName: "Barba Completa" },
+    { name: { es: "Barba Express", en: "Express Beard", ca: "Barba Express" }, priceEur: 12, durationMinutes: 20, category: ["Barba"], booksyName: "Barba Express" },
+    { name: { es: "Corte + Barba Completa + Limpieza facial", en: "Haircut + Full Beard + Facial Clean", ca: "Tall + Barba Completa + Neteja facial" }, priceEur: 38, durationMinutes: 60, category: ["Corte", "Barba", "Extra"], booksyName: "Corte + Barba Completa + Limpieza facial" },
+    { name: { es: "Corte + Limpieza facial", en: "Haircut + Facial Clean", ca: "Tall + Neteja facial" }, priceEur: 25, durationMinutes: 45, category: ["Corte", "Extra"], booksyName: "Corte + Limpieza facial" },
+    { name: { es: "Cejas", en: "Eyebrows", ca: "Celles" }, priceEur: 5, durationMinutes: 15, category: ["Extra"], booksyName: "Cejas" },
+    { name: { es: "Depilación con cera", en: "Waxing", ca: "Depilacio amb cera" }, priceEur: 10, durationMinutes: 20, category: ["Extra"], booksyName: "Depilación con cera" },
+    { name: { es: "Corte jubilado", en: "Senior Haircut", ca: "Tall jubilat" }, priceEur: 16, durationMinutes: 30, category: ["Corte"], booksyName: "Corte jubilado" },
 ];
 
 export function Services() {
     const [activeGroup, setActiveGroup] = useState<ServiceGroup>("Combos");
     const { language, formatFromEur } = usePreferences();
-    const contentLanguage = language === "ca" ? "es" : language;
+    const contentLanguage = language;
 
     const groupedServices = useMemo(
         () => ({
@@ -63,25 +63,25 @@ export function Services() {
             {
                 key: "Combos",
                 title: language === "en" ? "Combos" : "Combos",
-                hint: language === "en" ? "Haircut + beard" : "Corte + barba",
+                hint: language === "en" ? "Haircut + beard" : language === "ca" ? "Tall + barba" : "Corte + barba",
                 icon: Sparkles,
             },
             {
                 key: "Corte",
-                title: language === "en" ? "Haircut" : "Corte",
-                hint: language === "en" ? "Classic and precision" : "Clasico y precision",
+                title: language === "en" ? "Haircut" : language === "ca" ? "Tall" : "Corte",
+                hint: language === "en" ? "Classic and precision" : language === "ca" ? "Classic i precisio" : "Clasico y precision",
                 icon: Scissors,
             },
             {
                 key: "Barba",
-                title: language === "en" ? "Beard" : "Barba",
-                hint: language === "en" ? "Shaping and finish" : "Perfilado y acabado",
+                title: language === "en" ? "Beard" : language === "ca" ? "Barba" : "Barba",
+                hint: language === "en" ? "Shaping and finish" : language === "ca" ? "Perfilat i acabat" : "Perfilado y acabado",
                 icon: VenetianMask,
             },
             {
                 key: "Detalles",
-                title: language === "en" ? "Details" : "Detalles",
-                hint: language === "en" ? "Quick add-ons" : "Complementos rapidos",
+                title: language === "en" ? "Details" : language === "ca" ? "Detalls" : "Detalles",
+                hint: language === "en" ? "Quick add-ons" : language === "ca" ? "Complements rapids" : "Complementos rapidos",
                 icon: Gem,
             },
         ];
@@ -94,13 +94,21 @@ export function Services() {
             book: "Book",
             formatDuration: (minutes: number) => (minutes >= 60 ? `${Math.round(minutes / 60)} h` : `${minutes} min`),
         }
-        : {
-            title: "Servicios & Precios",
-            subtitle: "Carta organizada por tipo de servicio para reservar mas rapido y con mejor contexto.",
-            popular: "Top",
-            book: "Reservar",
-            formatDuration: (minutes: number) => (minutes >= 60 ? `${Math.round(minutes / 60)} h` : `${minutes} min`),
-        };
+        : language === "ca"
+            ? {
+                title: "Serveis i Preus",
+                subtitle: "Carta organitzada per tipus de servei per reservar mes rapid i amb millor context.",
+                popular: "Top",
+                book: "Reservar",
+                formatDuration: (minutes: number) => (minutes >= 60 ? `${Math.round(minutes / 60)} h` : `${minutes} min`),
+            }
+            : {
+                title: "Servicios & Precios",
+                subtitle: "Carta organizada por tipo de servicio para reservar mas rapido y con mejor contexto.",
+                popular: "Top",
+                book: "Reservar",
+                formatDuration: (minutes: number) => (minutes >= 60 ? `${Math.round(minutes / 60)} h` : `${minutes} min`),
+            };
 
     return (
         <section id="servicios" className="relative py-20 lg:py-24 bg-neutral-50 dark:bg-transparent">
@@ -111,9 +119,9 @@ export function Services() {
             <div className="relative max-w-6xl mx-auto px-6 md:px-12">
                 <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
                     <div>
-                        <h2 className="font-serif text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-4 tracking-tight transition-colors duration-500">Servicios & Precios</h2>
+                        <h2 className="font-serif text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-4 tracking-tight transition-colors duration-500">{sectionCopy.title}</h2>
                         <p className="text-neutral-500 dark:text-neutral-300 font-light text-lg max-w-xl transition-colors duration-500">
-                            Carta organizada por tipo de servicio para reservar más rápido y con mejor contexto.
+                            {sectionCopy.subtitle}
                         </p>
                     </div>
                 </div>

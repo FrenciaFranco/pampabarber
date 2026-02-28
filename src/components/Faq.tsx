@@ -1,14 +1,35 @@
-import { localFaq } from "@/lib/seo";
+"use client";
+
+import { getLocalFaq } from "@/lib/seo";
+import { usePreferences } from "@/components/PreferencesProvider";
 
 export function Faq() {
+  const { language } = usePreferences();
+  const localFaq = getLocalFaq(language);
+  const copy =
+    language === "en"
+      ? {
+          title: "FAQ",
+          subtitle: "Quick answers about PAMPA Barber, Booksy bookings, and our location in Barcelona.",
+        }
+      : language === "ca"
+        ? {
+            title: "Preguntes frequents",
+            subtitle: "Respostes rapides sobre PAMPA Barber, les reserves a Booksy i la nostra ubicacio a Barcelona.",
+          }
+        : {
+            title: "FAQ",
+            subtitle: "Respuestas rapidas sobre PAMPA Barber, reservas en Booksy y nuestra ubicacion en Barcelona.",
+          };
+
   return (
     <section id="faq" className="py-20 md:py-28 bg-white dark:bg-neutral-950">
       <div className="max-w-5xl mx-auto px-6 md:px-12">
         <h2 className="font-serif text-4xl md:text-5xl font-bold text-neutral-900 dark:text-white mb-4 tracking-tight">
-          FAQ
+          {copy.title}
         </h2>
         <p className="text-neutral-600 dark:text-neutral-400 mb-10 text-lg max-w-3xl">
-          Respuestas rapidas sobre PAMPA Barber, reservas en Booksy y nuestra ubicacion en Barcelona.
+          {copy.subtitle}
         </p>
 
         <div className="space-y-4">
