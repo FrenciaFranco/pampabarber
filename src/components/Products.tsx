@@ -21,7 +21,7 @@ const products: ProductItem[] = [
         priceEur: 19.9,
         image: "/products/cera.png",
         description: {
-            es: "Fijacion fuerte con acabado mate natural para un estilo duradero.",
+            es: "Fijación fuerte con acabado mate natural para un estilo duradero.",
             en: "Strong hold with a natural matte finish for long-lasting style.",
             ca: "Fixacio forta amb acabat mat natural per a un estil durador.",
         }
@@ -43,7 +43,7 @@ const products: ProductItem[] = [
         priceEur: 39.9,
         image: "/products/navaja.png",
         description: {
-            es: "Consigue la precision de un barbero profesional desde casa.",
+            es: "Consigue la precisión de un barbero profesional desde casa.",
             en: "Get professional barber precision at home.",
             ca: "Aconsegueix precisio de barber professional des de casa.",
         }
@@ -54,7 +54,7 @@ const products: ProductItem[] = [
         priceEur: 89.9,
         image: "/products/maquina.png",
         description: {
-            es: "Potencia y precision excepcionales para cortes perfectos.",
+            es: "Potencia y precisión excepcionales para cortes perfectos.",
             en: "Exceptional power and precision for perfect cuts.",
             ca: "Potencia i precisio excepcionals per a talls perfectes.",
         }
@@ -87,7 +87,7 @@ export function Products() {
             }
             : {
                 title: "Nuestros productos",
-                subtitle: "Manten tu mejor version en casa con nuestra linea de productos y herramientas de nivel profesional.",
+                subtitle: "Mantén tu mejor versión en casa con nuestra línea de productos y herramientas de nivel profesional.",
                 prevProduct: "Anterior producto",
                 nextProduct: "Siguiente producto",
                 addToCart: "Agregar al carrito",

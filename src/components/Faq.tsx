@@ -19,7 +19,7 @@ export function Faq() {
           }
         : {
             title: "FAQ",
-            subtitle: "Respuestas rapidas sobre PAMPA Barber, reservas en Booksy y nuestra ubicacion en Barcelona.",
+            subtitle: "Respuestas rápidas sobre PAMPA Barber, reservas en Booksy y nuestra ubicación en Barcelona.",
           };
 
   return (

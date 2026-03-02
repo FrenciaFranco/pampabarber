@@ -60,13 +60,13 @@ export function Navbar() {
                     { name: "Suscripciones", href: "#suscripciones" },
                     { name: "Productos", href: "#productos" },
                     { name: "Estilo", href: "#estilo" },
-                    { name: "Resenas", href: "#resenas" },
-                    { name: "Ubicacion", href: "#ubicacion" },
+                    { name: "Reseñas", href: "#resenas" },
+                    { name: "Ubicación", href: "#ubicacion" },
                     { name: "FAQ", href: "#faq" },
                 ],
                 reserve: "Reservar",
                 toggleTheme: "Cambiar tema",
-                toggleMenu: "Abrir menu",
+                toggleMenu: "Abrir menú",
             };
 
     const navTheme = isDarkMode

@@ -79,12 +79,12 @@ export function Reviews() {
                 booksyReview: "Ressenya de Booksy",
             }
             : {
-                title: "Resenas.",
+                title: "Reseñas.",
                 inBooksy: "en Booksy",
                 inGoogle: "en Google Maps",
                 barberLabel: "Barbero",
-                googleReview: "Resena de Google Maps",
-                booksyReview: "Resena de Booksy",
+                googleReview: "Reseña de Google Maps",
+                booksyReview: "Reseña de Booksy",
             };
 
     return (

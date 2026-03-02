@@ -14,7 +14,7 @@ export function Claims() {
                     ? "Impeccable technique and close attention to detail in every line."
                     : language === "ca"
                         ? "Tecnica impecable i atencio al detall en cada traç."
-                        : "Tecnica impecable y atencion al detalle en cada trazo.",
+                        : "Técnica impecable y atención al detalle en cada trazo.",
             icon: <Scissors className="w-6 h-6 text-neutral-900 dark:text-neutral-100" strokeWidth={1.5} />,
         },
         {
@@ -24,7 +24,7 @@ export function Claims() {
                     ? "Millimetric shaping and premium face care."
                     : language === "ca"
                         ? "Perfilat milimetric i cura facial superior."
-                        : "Perfilado milimetrico y cuidado facial superior.",
+                        : "Perfilado milimétrico y cuidado facial superior.",
             icon: <VenetianMask className="w-6 h-6 text-neutral-900 dark:text-neutral-100" strokeWidth={1.5} />,
         },
         {

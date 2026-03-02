@@ -24,7 +24,7 @@ export const BOOKSY_REVIEW_COUNT = 75;
 export const GOOGLE_RATING = "4.9";
 
 export const BOOKSY_DESCRIPTION =
-  "Barberia en Avinguda Meridiana, 1 (Barcelona) con reserva online 24/7, cortes y barba con atencion al detalle, y valoraciones verificadas de clientes.";
+  "Barbería en Avinguda Meridiana, 1 (Barcelona) con reserva online 24/7, cortes y barba con atención al detalle, y valoraciones verificadas de clientes.";
 
 export const BOOKSY_GALLERY_IMAGES = [
   "https://d375139ucebi94.cloudfront.net/region2/es/121866/biz_photo/90957f91ef98499bbdc3a0fa5af429-pampa-barber-biz-photo-fb9271bc6e6a49f6b33c0dae56901d-booksy.jpeg",
@@ -50,7 +50,8 @@ export const BOOKSY_BARBERS = [
     role: "Barbero",
     badge: "",
     experience: "10 años de experiencia",
-    details: "Especialista en corte y barba con atencion al detalle. Ha trabajado en varios países del mundo, como Ecuador.",
+    details:
+      "Especialista en corte y barba con atención al detalle. Ha trabajado en varios países del mundo, como Ecuador y República Dominicana.",
     image:
       "https://d375139ucebi94.cloudfront.net/region2/es/121866/resource_photos/7c917852eca24da395c4634e1ca00a-pampa-barber-freli-6031738ad62344a286d02525896554-booksy.jpeg",
   },
@@ -74,7 +75,7 @@ export const REVIEWS: ReviewItem[] = [
     name: "Anonymous",
     barber: "Octavio",
     source: "Booksy",
-    text: "Atencion inmejorable, actualizados con los ultimos cortes. Todo perfecto, muy recomendable.",
+    text: "Atención inmejorable, actualizados con los últimos cortes. Todo perfecto, muy recomendable.",
   },
   {
     name: "Alma Café",
@@ -98,7 +99,7 @@ export const REVIEWS: ReviewItem[] = [
     name: "Anonymous",
     barber: "Octavio",
     source: "Booksy",
-    text: "Increible la atencion y el corte, 10/10.",
+    text: "Increíble la atención y el corte, 10/10.",
   },
   {
     name: "Cillian O Murchu",
@@ -110,7 +111,7 @@ export const REVIEWS: ReviewItem[] = [
     name: "Anonymous",
     barber: "Freli",
     source: "Booksy",
-    text: "Increible. Muy buen servicio. Te asesoran y cortan muy bien.",
+    text: "Increíble. Muy buen servicio. Te asesoran y cortan muy bien.",
   },
   {
     name: "Pedro",

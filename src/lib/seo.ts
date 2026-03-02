@@ -23,21 +23,21 @@ export const defaultKeywords = [
 const localFaqByLanguage: Record<SeoLanguage, Array<{ question: string; answer: string }>> = {
   es: [
     {
-      question: "Donde esta PAMPA Barber en Barcelona?",
+      question: "¿Dónde está PAMPA Barber en Barcelona?",
       answer: "Estamos en Avinguda Meridiana, 1, Local 2, 08018, Barcelona.",
     },
     {
-      question: "Como reservo una cita en PAMPA Barber?",
+      question: "¿Cómo reservo una cita en PAMPA Barber?",
       answer: "Puedes reservar online en Booksy, disponible 24/7.",
     },
     {
-      question: "Que servicios ofrece la barberia?",
+      question: "¿Qué servicios ofrece la barbería?",
       answer:
-        "Realizamos corte de cabello, barba completa, barba express, diseno de cejas, limpieza facial y packs de corte + barba.",
+        "Realizamos corte de cabello, barba completa, barba express, diseño de cejas, limpieza facial y packs de corte + barba.",
     },
     {
-      question: "PAMPA Barber tiene buenas resenas?",
-      answer: `Si. Nuestros clientes nos valoran con ${BOOKSY_RATING}/5 en Booksy.`,
+      question: "¿PAMPA Barber tiene buenas reseñas?",
+      answer: `Sí. Nuestros clientes nos valoran con ${BOOKSY_RATING}/5 en Booksy.`,
     },
   ],
   en: [

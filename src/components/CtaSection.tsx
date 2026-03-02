@@ -25,7 +25,7 @@ export function CtaSection() {
             : {
                 titleTop: "Tu estilo, sin esperas.",
                 titleBottom: "Reserva en 30 segundos.",
-                subtitle: "Selecciona tu servicio y elige el horario que mejor te venga a traves de Booksy. El proceso es rapido, sencillo y directo.",
+                subtitle: "Selecciona tu servicio y elige el horario que mejor te venga a través de Booksy. El proceso es rápido, sencillo y directo.",
                 cta: "Reservar en Booksy",
                 amenities: ["Wi-Fi", "Tarjetas", "Accesible", "Fidelidad", "Mascotas", "Kids-friendly"],
             };

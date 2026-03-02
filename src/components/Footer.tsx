@@ -44,20 +44,20 @@ export function Footer() {
                 localPage2: "Meridiana i Ciutadella",
             }
             : {
-                brand: "La esencia de la barberia clasica adaptada al hombre moderno. Corte, detalle y una experiencia libre de ruido.",
-                visitUs: "Visitanos",
+                brand: "La esencia de la barbería clásica adaptada al hombre moderno. Corte, detalle y una experiencia libre de ruido.",
+                visitUs: "Visítanos",
                 schedule: "Horarios",
                 checkBooksy: "Consultar en Booksy.",
                 seeHours: "Ver horarios",
-                pages: "Paginas",
+                pages: "Páginas",
                 services: "Servicios",
                 style: "Estilo",
-                reviews: "Resenas",
-                location: "Ubicacion",
+                reviews: "Reseñas",
+                location: "Ubicación",
                 rights: "Todos los derechos reservados.",
-                terms: "Terminos",
+                terms: "Términos",
                 privacy: "Privacidad",
-                localPage1: "Barberia Barcelona",
+                localPage1: "Barbería Barcelona",
                 localPage2: "Meridiana y Ciutadella",
             };
 

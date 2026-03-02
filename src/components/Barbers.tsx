@@ -21,7 +21,7 @@ export function Barbers() {
           }
         : {
             title: "Barberos.",
-            subtitle: "Profesionales especializados en corte y barba, con atencion personalizada.",
+            subtitle: "Profesionales especializados en corte y barba, con atención personalizada.",
             altPrefix: "Barbero",
           };
 
@@ -36,7 +36,8 @@ export function Barbers() {
           Freli: {
             role: "Barber",
             experience: "10 years of experience",
-            details: "Specialist in haircut and beard care with strong attention to detail. He has worked in Ecuador.",
+            details:
+              "Specialist in haircut and beard care with strong attention to detail. He has worked in Ecuador and the Dominican Republic.",
           },
         }
       : language === "ca"
@@ -50,20 +51,20 @@ export function Barbers() {
               role: "Barber",
               experience: "10 anys d'experiencia",
               details:
-                "Especialista en tall i barba amb atencio al detall. Ha treballat en diversos paisos, com l'Equador.",
+                "Especialista en tall i barba amb atencio al detall. Ha treballat en diversos paisos, com l'Equador i la República Dominicana.",
             },
           }
         : {
             Octavio: {
               role: "Barbero",
-              experience: "15 anos de experiencia",
-              details: "Especialista en diseno. Ha trabajado en varios paises del mundo, como Argentina y Portugal.",
+              experience: "15 años de experiencia",
+              details: "Especialista en diseño. Ha trabajado en varios países del mundo, como Argentina y Portugal.",
             },
             Freli: {
               role: "Barbero",
-              experience: "10 anos de experiencia",
+              experience: "10 años de experiencia",
               details:
-                "Especialista en corte y barba con atencion al detalle. Ha trabajado en varios paises del mundo, como Ecuador.",
+                "Especialista en corte y barba con atención al detalle. Ha trabajado en varios países del mundo, como Ecuador y República Dominicana.",
             },
           };
 

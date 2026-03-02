@@ -87,14 +87,14 @@ export function Gallery() {
             }
             : {
                 title: "Estilo.",
-                subtitle: "Cortes reales, acabados limpios y detalles del estudio en un formato mas visual y moderno.",
+                subtitle: "Cortes reales, acabados limpios y detalles del estudio en un formato más visual y moderno.",
                 prevPhoto: "Foto anterior",
                 nextPhoto: "Foto siguiente",
                 goToPhoto: "Ir a foto",
                 closeZoom: "Cerrar zoom",
                 zoomOut: "Reducir zoom",
                 zoomIn: "Aumentar zoom",
-                viewFullGallery: "Ver galeria completa",
+                viewFullGallery: "Ver galería completa",
                 styleAlt: "PAMPA Barber Style",
                 thumbAlt: "Miniatura",
             };

@@ -51,18 +51,18 @@ export function Location() {
                 status: { open: "Oberta", comingSoon: "Propera obertura" },
             }
             : {
-                title: "Nuestras barberias",
-                subtitle: "Barcelona (Meridiana) ya abierta. Proximas aperturas: Barcelona (Sagrada Familia) y Madrid (Retiro).",
+                title: "Nuestras barberías",
+                subtitle: "Barcelona (Meridiana) ya abierta. Próximas aperturas: Barcelona (Sagrada Familia) y Madrid (Retiro).",
                 selectedBranch: "Sucursal seleccionada",
-                copiedAddress: "Direccion copiada",
-                copyAddress: "Copiar direccion",
+                copiedAddress: "Dirección copiada",
+                copyAddress: "Copiar dirección",
                 viewOnMap: "Ver en mapa",
-                hint: "Selecciona una barberia para ver su ubicacion.",
+                hint: "Selecciona una barbería para ver su ubicación.",
                 openInGoogleMaps: "Abrir en Google Maps",
-                branchPhotos: "Fotos de nuestra barberia",
-                noPhotos: "Aun no hay fotos publicadas para esta barberia.",
+                branchPhotos: "Fotos de nuestra barbería",
+                noPhotos: "Aún no hay fotos publicadas para esta barbería.",
                 mapTitle: "Mapa de",
-                status: { open: "Abierta", comingSoon: "Proxima apertura" },
+                status: { open: "Abierta", comingSoon: "Próxima apertura" },
             };
 
     const branches: Branch[] = [
@@ -86,7 +86,7 @@ export function Location() {
             city: "Barcelona",
             zone: { es: "Sagrada Familia", en: "Sagrada Familia", ca: "Sagrada Familia" },
             address: {
-                es: "Zona Sagrada Familia, Barcelona (proxima apertura)",
+                es: "Zona Sagrada Familia, Barcelona (próxima apertura)",
                 en: "Sagrada Familia area, Barcelona (coming soon)",
                 ca: "Zona Sagrada Familia, Barcelona (propera obertura)",
             },
@@ -101,7 +101,7 @@ export function Location() {
             city: "Madrid",
             zone: { es: "Retiro", en: "Retiro", ca: "Retiro" },
             address: {
-                es: "Zona Retiro, Madrid (proxima apertura)",
+                es: "Zona Retiro, Madrid (próxima apertura)",
                 en: "Retiro area, Madrid (coming soon)",
                 ca: "Zona Retiro, Madrid (propera obertura)",
             },

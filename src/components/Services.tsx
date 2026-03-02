@@ -69,7 +69,7 @@ export function Services() {
             {
                 key: "Corte",
                 title: language === "en" ? "Haircut" : language === "ca" ? "Tall" : "Corte",
-                hint: language === "en" ? "Classic and precision" : language === "ca" ? "Classic i precisio" : "Clasico y precision",
+                hint: language === "en" ? "Classic and precision" : language === "ca" ? "Classic i precisio" : "Clásico y precisión",
                 icon: Scissors,
             },
             {
@@ -104,7 +104,7 @@ export function Services() {
             }
             : {
                 title: "Servicios & Precios",
-                subtitle: "Carta organizada por tipo de servicio para reservar mas rapido y con mejor contexto.",
+                subtitle: "Carta organizada por tipo de servicio para reservar más rápido y con mejor contexto.",
                 popular: "Top",
                 book: "Reservar",
                 formatDuration: (minutes: number) => (minutes >= 60 ? `${Math.round(minutes / 60)} h` : `${minutes} min`),
