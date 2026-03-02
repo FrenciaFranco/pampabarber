@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Instagram, X, ZoomIn, ZoomOut } from "lucide-react";
@@ -130,23 +131,31 @@ export function Gallery() {
                     onMouseLeave={() => setIsPaused(false)}
                 >
                     <div className="relative aspect-[16/10] md:aspect-[16/8.5] lg:aspect-[21/9] overflow-hidden bg-neutral-900/20">
-                        <img
+                        <Image
                             src={images[activeIndex]}
                             alt=""
                             aria-hidden="true"
-                            className="absolute inset-0 w-full h-full object-cover blur-2xl scale-110 opacity-40"
+                            fill
+                            sizes="(max-width: 1024px) 100vw, 980px"
+                            className="absolute inset-0 object-cover blur-2xl scale-110 opacity-40"
                         />
 
-                        <motion.img
+                        <motion.div
                             key={images[activeIndex]}
-                            src={images[activeIndex]}
-                            alt={`${copy.styleAlt} ${activeIndex + 1}`}
-                            className="relative z-[1] w-full h-full object-contain cursor-zoom-in"
+                            className="relative z-[1] w-full h-full cursor-zoom-in"
                             initial={{ opacity: 0.2, scale: 1.01 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.45 }}
                             onClick={openLightbox}
-                        />
+                        >
+                            <Image
+                                src={images[activeIndex]}
+                                alt={`${copy.styleAlt} ${activeIndex + 1}`}
+                                fill
+                                sizes="(max-width: 1024px) 100vw, 980px"
+                                className="object-contain"
+                            />
+                        </motion.div>
 
                         <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-black/0 pointer-events-none" />
 
@@ -192,12 +201,15 @@ export function Gallery() {
                                                 : "border-neutral-200 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-500"
                                         }`}
                                     >
-                                        <img
-                                            src={src}
-                                            alt={`${copy.thumbAlt} ${idx + 1}`}
-                                            className="w-full aspect-[4/3] object-cover"
-                                            loading="lazy"
-                                        />
+                                        <div className="relative w-full aspect-[4/3]">
+                                            <Image
+                                                src={src}
+                                                alt={`${copy.thumbAlt} ${idx + 1}`}
+                                                fill
+                                                sizes="(max-width: 768px) 25vw, 12vw"
+                                                className="object-cover"
+                                            />
+                                        </div>
                                     </button>
                                 );
                             })}
@@ -279,9 +291,11 @@ export function Gallery() {
                                 className="absolute inset-0 flex items-center justify-center p-8"
                                 onClick={(event) => event.stopPropagation()}
                             >
-                                <img
+                                <Image
                                     src={images[activeIndex]}
                                     alt={`${copy.styleAlt} ${activeIndex + 1}`}
+                                    width={1600}
+                                    height={1200}
                                     className="max-w-[92vw] max-h-[86vh] object-contain select-none"
                                     style={{ transform: `scale(${zoomLevel})`, transformOrigin: "center center" }}
                                 />

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { Check, Copy, Map, MapPin } from "lucide-react";
 import { usePreferences } from "@/components/PreferencesProvider";
@@ -160,12 +161,15 @@ export function Location() {
                                 }`}
                             >
                                 <div className="aspect-[4/5] overflow-hidden bg-neutral-200 dark:bg-neutral-800">
-                                    <img
-                                        src={branch.image}
-                                        alt={`${branch.city} ${branch.zone[language]}`}
-                                        className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                                        loading="lazy"
-                                    />
+                                    <div className="relative w-full h-full">
+                                        <Image
+                                            src={branch.image}
+                                            alt={`${branch.city} ${branch.zone[language]}`}
+                                            fill
+                                            sizes="(max-width: 768px) 100vw, 33vw"
+                                            className="object-cover transition-transform duration-700 hover:scale-105"
+                                        />
+                                    </div>
                                 </div>
 
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
@@ -259,12 +263,15 @@ export function Location() {
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {(branchPhotosById[selectedBranch.id] ?? []).map((photo) => (
                                 <div key={photo} className="overflow-hidden rounded-2xl border border-neutral-200 dark:border-white/10 bg-neutral-100 dark:bg-neutral-900">
-                                    <img
-                                        src={photo}
-                                        alt={`PAMPA Barber ${selectedBranch.zone[language]}`}
-                                        className="w-full h-[260px] md:h-[320px] object-cover"
-                                        loading="lazy"
-                                    />
+                                    <div className="relative w-full h-[260px] md:h-[320px]">
+                                        <Image
+                                            src={photo}
+                                            alt={`PAMPA Barber ${selectedBranch.zone[language]}`}
+                                            fill
+                                            sizes="(max-width: 768px) 100vw, 50vw"
+                                            className="object-cover"
+                                        />
+                                    </div>
                                 </div>
                             ))}
                         </div>

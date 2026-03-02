@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { BOOKSY_BARBERS } from "@/lib/booksy";
 import { usePreferences } from "@/components/PreferencesProvider";
@@ -51,7 +52,7 @@ export function Barbers() {
               role: "Barber",
               experience: "10 anys d'experiencia",
               details:
-                "Especialista en tall i barba amb atencio al detall. Ha treballat en diversos paisos, com l'Equador i la República Dominicana.",
+                "Especialista en tall i barba amb atencio al detall. Ha treballat a l'Equador i la Republica Dominicana.",
             },
           }
         : {
@@ -64,7 +65,7 @@ export function Barbers() {
               role: "Barbero",
               experience: "10 años de experiencia",
               details:
-                "Especialista en corte y barba con atención al detalle. Ha trabajado en varios países del mundo, como Ecuador y República Dominicana.",
+                "Especialista en corte y barba con atención al detalle. Ha trabajado en Ecuador y Republica Dominicana.",
             },
           };
 
@@ -93,17 +94,20 @@ export function Barbers() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.6, delay: idx * 0.1 }}
-              className="group relative overflow-hidden rounded-2xl border border-neutral-200/60 dark:border-white/10 bg-white/40 dark:bg-white/[0.02] p-5 md:p-6 backdrop-blur-xl shadow-sm dark:shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:border-neutral-300/80 dark:hover:border-white/20 hover:bg-white/60 dark:hover:bg-white/[0.04] hover:shadow-md dark:hover:shadow-[0_8px_30px_rgba(0,0,0,0.2)]"
+              className="group relative h-full overflow-hidden rounded-2xl border border-neutral-200/60 dark:border-white/10 bg-white/40 dark:bg-white/[0.02] p-5 md:p-6 backdrop-blur-xl shadow-sm dark:shadow-2xl transition-all duration-300 hover:-translate-y-1 hover:border-neutral-300/80 dark:hover:border-white/20 hover:bg-white/60 dark:hover:bg-white/[0.04] hover:shadow-md dark:hover:shadow-[0_8px_30px_rgba(0,0,0,0.2)]"
             >
               <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-neutral-300/50 dark:via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
               <div className="relative z-10 flex items-center gap-4 md:gap-5">
-                <img
-                  src={barber.image}
-                  alt={`${copy.altPrefix} ${barber.name} en PAMPA Barber`}
-                  className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover border-2 border-white/80 dark:border-white/10 shadow-sm"
-                  loading="lazy"
-                />
+                <div className="relative w-20 h-20 md:w-24 md:h-24">
+                  <Image
+                    src={barber.image}
+                    alt={`${copy.altPrefix} ${barber.name} en PAMPA Barber`}
+                    fill
+                    sizes="(max-width: 768px) 80px, 96px"
+                    className="rounded-full object-cover border-2 border-white/80 dark:border-white/10 shadow-sm"
+                  />
+                </div>
                 <div>
                   <div className="flex items-center gap-2 mb-1">
                     <h3 className="font-serif text-2xl text-neutral-900 dark:text-white">{barber.name}</h3>
@@ -125,3 +129,4 @@ export function Barbers() {
     </section>
   );
 }
+

@@ -14,17 +14,17 @@ export function useTheme() {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-    const [theme, setTheme] = useState<Theme>("dark");
+    const [theme, setTheme] = useState<Theme>(() => {
+        if (typeof window === "undefined") {
+            return "dark";
+        }
+        const stored = localStorage.getItem("theme");
+        return stored === "light" || stored === "dark" ? stored : "dark";
+    });
 
     useEffect(() => {
-        const stored = localStorage.getItem("theme") as Theme | null;
-        if (stored) {
-            setTheme(stored);
-            document.documentElement.classList.toggle("dark", stored === "dark");
-        } else {
-            document.documentElement.classList.add("dark");
-        }
-    }, []);
+        document.documentElement.classList.toggle("dark", theme === "dark");
+    }, [theme]);
 
     const toggleTheme = useCallback(() => {
         setTheme((prev) => {

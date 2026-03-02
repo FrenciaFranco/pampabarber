@@ -4,11 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { LiquidMetal } from "@paper-design/shaders-react";
-import {
-    BOOKSY_DESCRIPTION,
-    BOOKSY_URL,
-    BOOKSY_GALLERY_IMAGES,
-} from "@/lib/booksy";
+import { BOOKSY_URL } from "@/lib/booksy";
 import { usePreferences } from "@/components/PreferencesProvider";
 
 export function Hero() {
@@ -33,10 +29,10 @@ export function Hero() {
             titleTop: "PAMPA Barber is not a traditional barbershop.",
             subtitle: (
                 <>
-                    <p>It's a space for those who understand the value of detail.</p>
+                    <p>It is a space for those who understand the value of detail.</p>
                     <p className="text-white font-normal mt-2">Refined technique. Real precision. Minimalist aesthetics.</p>
-                    <p className="mt-2">We don't improvise here: your image is designed.</p>
-                    <p>The 5★ are a consequence, not a promise.</p>
+                    <p className="mt-2">We do not improvise here: your image is designed.</p>
+                    <p>The 5-star rating is a consequence, not a promise.</p>
                     <p className="text-white text-lg md:text-xl font-normal mt-4">Book when you are ready to elevate your standards.</p>
                 </>
             ),
@@ -45,28 +41,28 @@ export function Hero() {
         }
         : language === "ca"
             ? {
-                titleTop: "PAMPA Barber no és una barberia tradicional.",
+                titleTop: "PAMPA Barber no es una barberia tradicional.",
                 subtitle: (
                     <>
-                        <p>És un espai per a qui entén el valor del detall.</p>
-                        <p className="text-white font-normal mt-2">Tècnica depurada. Precisió real. Estètica minimalista.</p>
-                        <p className="mt-2">Aquí no s'improvisa: es dissenya la teva imatge.</p>
-                        <p>Les 5★ són conseqüència, no promesa.</p>
-                        <p className="text-white text-lg md:text-xl font-normal mt-4">Reserva quan estiguis llest per elevar el teu estàndard.</p>
+                        <p>Es un espai per a qui enten el valor del detall.</p>
+                        <p className="text-white font-normal mt-2">Tecnica depurada. Precisio real. Estetica minimalista.</p>
+                        <p className="mt-2">Aqui no s&apos;improvisa: es dissenya la teva imatge.</p>
+                        <p>Les 5 estrelles son consequencia, no promesa.</p>
+                        <p className="text-white text-lg md:text-xl font-normal mt-4">Reserva quan estiguis llest per elevar el teu estandard.</p>
                     </>
                 ),
                 reserve: "Reservar cita",
                 prices: "Veure serveis i preus",
             }
             : {
-                titleTop: "PAMPA Barber no es una barbería tradicional.",
+                titleTop: "PAMPA Barber no es una barberia tradicional.",
                 subtitle: (
                     <>
                         <p>Es un espacio para quienes entienden el valor del detalle.</p>
-                        <p className="text-white font-normal mt-2">Técnica depurada. Precisión real. Estética minimalista.</p>
-                        <p className="mt-2">Aquí no se improvisa: se diseña tu imagen.</p>
-                        <p>Las 5★ son consecuencia, no promesa.</p>
-                        <p className="text-white text-lg md:text-xl font-normal mt-4">Reserva cuando estés listo para elevar tu estándar.</p>
+                        <p className="text-white font-normal mt-2">Tecnica depurada. Precision real. Estetica minimalista.</p>
+                        <p className="mt-2">Aqui no se improvisa: se disena tu imagen.</p>
+                        <p>Las 5 estrellas son consecuencia, no promesa.</p>
+                        <p className="text-white text-lg md:text-xl font-normal mt-4">Reserva cuando estes listo para elevar tu estandar.</p>
                     </>
                 ),
                 reserve: "Reservar cita",
@@ -75,7 +71,7 @@ export function Hero() {
 
     return (
         <section ref={sectionRef} className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-neutral-950 text-white">
-            {/* LiquidMetal shader — rendered at low res (480×320) and scaled up for performance */}
+            {/* LiquidMetal shader rendered at low res (480x320) and scaled up for performance */}
             <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
                 <div className="absolute inset-0 overflow-hidden flex items-center justify-center">
                     <div
@@ -112,8 +108,6 @@ export function Hero() {
             <div className="relative z-10 max-w-7xl w-full mx-auto px-6 md:px-12 mt-20">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
                     <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
-
-                        {/* Headline */}
                         <motion.h1
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -123,7 +117,6 @@ export function Hero() {
                             {copy.titleTop}
                         </motion.h1>
 
-                        {/* Subheadline */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -133,7 +126,6 @@ export function Hero() {
                             {copy.subtitle}
                         </motion.div>
 
-                        {/* CTAs */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}

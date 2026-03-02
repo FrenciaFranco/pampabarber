@@ -33,42 +33,30 @@ export function usePreferences() {
 }
 
 export function PreferencesProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>("es");
-  const [currency, setCurrency] = useState<Currency>("EUR");
+  const [language, setLanguage] = useState<Language>(() => {
+    if (typeof window === "undefined") {
+      return "es";
+    }
+    const savedLanguage = window.localStorage.getItem("language");
+    return savedLanguage === "es" || savedLanguage === "en" || savedLanguage === "ca" ? savedLanguage : "es";
+  });
+  const [currency, setCurrency] = useState<Currency>(() => {
+    if (typeof window === "undefined") {
+      return "EUR";
+    }
+    const savedCurrency = window.localStorage.getItem("currency");
+    return savedCurrency === "EUR" || savedCurrency === "USD" ? savedCurrency : "EUR";
+  });
   const [rates, setRates] = useState<Record<Currency, number>>(fallbackRates);
-  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    const savedLanguage = window.localStorage.getItem("language") as Language | null;
-    const savedCurrency = window.localStorage.getItem("currency") as Currency | null;
-
-    if (savedLanguage === "es" || savedLanguage === "en" || savedLanguage === "ca") {
-      setLanguage(savedLanguage);
-    }
-
-    if (savedCurrency === "EUR" || savedCurrency === "USD") {
-      setCurrency(savedCurrency);
-    }
-
-    setHydrated(true);
-  }, []);
-
-  useEffect(() => {
-    if (!hydrated) {
-      return;
-    }
-
     window.localStorage.setItem("language", language);
     document.documentElement.lang = language;
-  }, [hydrated, language]);
+  }, [language]);
 
   useEffect(() => {
-    if (!hydrated) {
-      return;
-    }
-
     window.localStorage.setItem("currency", currency);
-  }, [hydrated, currency]);
+  }, [currency]);
 
   useEffect(() => {
     const controller = new AbortController();
