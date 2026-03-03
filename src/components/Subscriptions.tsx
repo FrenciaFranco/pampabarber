@@ -163,7 +163,7 @@ export function Subscriptions() {
                             </ul>
 
                             <a
-                                href={`https://wa.me/34689745124?text=${encodeURIComponent(contentLanguage === "en"
+                                href={`https://wa.me/34644583808?text=${encodeURIComponent(contentLanguage === "en"
                                         ? `Hi, I want the ${plan.name.en} monthly subscription.`
                                         : language === "ca"
                                         ? `Hola, vull la subscripcio mensual ${plan.name.ca}.`

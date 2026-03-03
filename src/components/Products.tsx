@@ -179,7 +179,7 @@ export function Products() {
                                     <button
                                         onClick={() =>
                                             window.open(
-                                                `https://wa.me/34689745124?text=${encodeURIComponent(copy.whatsappMessage(product.name[language]))}`,
+                                                `https://wa.me/34644583808?text=${encodeURIComponent(copy.whatsappMessage(product.name[language]))}`,
                                                 "_blank"
                                             )
                                         }
